@@ -6,13 +6,15 @@
 </template>
 
 <script>
-import M from 'materialize-css'
+//Sector de codigo js
+import M from 'materialize-css';
+
+
 export default {
   name: 'App',
   mounted(){
     this.axios.get('https://jsonplaceholder.typicode.com/users')
-    .then(()=>{
-    })
+    .then(()=>{})
   },
   methods:{
     saludar()
@@ -22,4 +24,3 @@ export default {
   }
 }
 </script>
-
