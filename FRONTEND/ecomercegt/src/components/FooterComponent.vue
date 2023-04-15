@@ -1,31 +1,69 @@
 <template>
     <div>
-        <footer class="page-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col l6 s12">
-                        <h5 class="white-text">Footer Content</h5>
-                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer
-                            content.</p>
+        <div class="blockcode">
+            <footer class="page-footer shadow">
+                <div class="d-flex flex-column mx-auto py-5" style="width: 80%">
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <div>
+                            <a href="/" class="d-flex align-items-center p-0 text-dark">
+                                <img alt="logo" src="" width="30px" />
+                                <span class="ms-3 h5 font-weight-bold">Devwares</span>
+                            </a>
+                            <p class="my-3" style="width: 250px">
+                                We are creating High Quality Resources and tools to Aid developers during the
+                                developement of their projects
+                            </p>
+                        </div>
+                        <div>
+                            <p class="h5 mb-4" style="font-weight: 600">Devwares</p>
+                            <ul class="p-0" style="list-style: none; cursor: pointer">
+                                <li class="my-2">
+                                    <a class="text-dark" href="/">Resources</a>
+                                </li>
+                                <li class="my-2">
+                                    <a class="text-dark" href="/">About Us</a>
+                                </li>
+                                <li class="my-2">
+                                    <a class="text-dark" href="/">Contact</a>
+                                </li>
+                                <li class="my-2">
+                                    <a class="text-dark" href="/">Blog</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="h5 mb-4" style="font-weight: 600">Help</p>
+                            <ul class="p-0" style="list-style: none; cursor: pointer">
+                                <li class="my-2">
+                                    <a class="text-dark" href="/">Support</a>
+                                </li>
+                                <li class="my-2">
+                                    <a class="text-dark" href="/">Sign Up</a>
+                                </li>
+                                <li class="my-2">
+                                    <a class="text-dark" href="/">Sign In</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="h5 mb-4" style="font-weight: 600">Help</p>
+                            <ul class="p-0" style="list-style: none; cursor: pointer">
+                                <li class="my-2">
+                                    <a class="text-dark" href="/">Support</a>
+                                </li>
+                                <li class="my-2">
+                                    <a class="text-dark" href="/">Sign Up</a>
+                                </li>
+                                <li class="my-2">
+                                    <a class="text-dark" href="/">Sign In</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col l4 offset-l2 s12">
-                        <h5 class="white-text">Links</h5>
-                        <ul>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                        </ul>
-                    </div>
+                    <small class="text-center mt-5">&copy; Devwares, 2020. All rights reserved.</small>
                 </div>
-            </div>
-            <div class="footer-copyright">
-                <div class="container">
-                    © 2014 Copyright Text
-                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-                </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
     </div>
 </template>
   
