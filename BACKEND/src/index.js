@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 //Configuracion de las rutas
 const usuarioRoutes = require('./routes/usuario.routes');
 const articuloRoutes = require('./routes/articulo.routes');
-
+const sessionRoutes = require('./routes/session.routes');
 
 //Inicio de la app express
 const app = express();
@@ -32,6 +32,7 @@ async function start() {
 
 app.use('/api',usuarioRoutes);
 app.use('/api',articuloRoutes);
+app.use('/api',sessionRoutes);
 
 //Inicio de la conexion de la base de datos
 start();

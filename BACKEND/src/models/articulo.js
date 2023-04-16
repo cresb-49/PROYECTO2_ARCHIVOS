@@ -3,11 +3,15 @@ const Schema = mongoose.Schema;
 const model = mongoose.model;
 
 const articuloSchema = new Schema({
+    usuario:String,
     nombre:String,
     precio:Number,
     imagen:Object,
-    cantidad:Number,
-    descripcion:String
+    descripcion:String,
+    categoria:Array
+},
+{
+    versionKey:false
 });
 
 module.exports = model('articulo',articuloSchema);

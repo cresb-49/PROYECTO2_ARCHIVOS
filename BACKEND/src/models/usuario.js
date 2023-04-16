@@ -7,6 +7,9 @@ const usuarioSchema = new Schema({
     password:String,
     role:String,
     carrito:Array
+},
+{
+    versionKey:false
 });
 
 module.exports = model('usuario',usuarioSchema);
