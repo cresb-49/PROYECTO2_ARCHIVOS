@@ -1,11 +1,16 @@
 const express = require('express');
-const usuario = require('../models/usuario');
+const usuarioControler = require('../controllers/usuarioController');
 
 const router = express.Router();
 
-router.post('/',(req,res)=>{
-    console.log('hola usuario');
-    res.send('hola usuario');
-});
+router.post('/usuario',usuarioControler.insertarUsuario);
+
+router.put('/usuario',usuarioControler.actualizarUsuario);
+
+router.get('/usuario',usuarioControler.obtenerUsuario);
+
+router.delete('/usuario',usuarioControler.eliminarUsuario);
+
+router.get('/usuarios',usuarioControler.obtenerUsuarios);
 
 module.exports = router;
