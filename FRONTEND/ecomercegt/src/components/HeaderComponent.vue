@@ -66,6 +66,8 @@ export default {
 <style scoped>
 #contenedorHeader{
     padding-bottom: 20px;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 </style>
   

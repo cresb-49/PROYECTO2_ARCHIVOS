@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="contenedor">
         <div class="blockcode">
             <footer class="page-footer shadow">
                 <div class="d-flex flex-column mx-auto py-5" style="width: 80%">
@@ -87,7 +87,12 @@ export default {
 }
 </script>
   
-<style>
-/* Estilos CSS del componente */
+<style scoped>
+.contenedor{
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 20px;
+    margin-bottom: 1%;
+}
 </style>
   
