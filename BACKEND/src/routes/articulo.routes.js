@@ -1,6 +1,7 @@
 const express = require('express');
 
 const artiuloController = require('../controllers/articuloController');
+const autorizacion = require('../middlewares/autorizacion');
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ router.put('/articulo',artiuloController.modificarArticulo);
 
 router.get('/articulo',artiuloController.obtenerArticulo);
 
-router.delete('/articulo',artiuloController.eliminarArticulo);
+router.delete('/articulo',autorizacion.auth,artiuloController.eliminarArticulo);
 
 router.get('/articulos',artiuloController.obtenerArticulos);
 

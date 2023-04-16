@@ -1,16 +1,23 @@
 const usuario = require('../models/usuario');
+const handleBcrypt = require('../helpers/handleBcrypt');
 
 const insertarUsuario = async (req, res) => {
-    const insert = new usuario(
-        {
-            user: req.body.user,
-            password: req.body.password,
-            role: req.body.role
-        }
-    )
-    let insertarUsuario = await insert.save();
-    insertarUsuario.password = null;
-    res.send(insertarUsuario);
+    try {
+        const password = await handleBcrypt.encrypt(req.body.password);
+        const insert = new usuario(
+            {
+                user: req.body.user,
+                password: password,
+                role: req.body.role
+            }
+        )
+        let insertarUsuario = await insert.save();
+        res.status(200);
+        res.send(insertarUsuario);
+    } catch (error) {
+        res.status(400);
+        res.send(error.message);
+    }
 }
 
 const actualizarUsuario = async (req, res) => {

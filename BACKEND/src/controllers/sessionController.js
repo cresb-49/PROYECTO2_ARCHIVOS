@@ -1,28 +1,37 @@
-const session = require('../models/session');
+const handleJwt = require('../helpers/handleJwt');
+const handleBcrypt = require('../helpers/handleBcrypt');
+const usuario = require('../models/usuario');
 
-const insertarSession = async (req, res) => {
-    console.log('Insertando session nuevo');
-    res.send('Insertando session nuevo');
-}
+const login = async (req, res) => {
+    try {
+        const data = req.body;
 
-const modificarSession = async (req, res) => {
-    console.log('Modificacion de session');
-    res.send('Modificacion de session');
-}
+        const resultUuser = await usuario.findOne({ user: data.user });
+        if (!resultUuser) {
+            res.status(400);
+            res.send('Nombre de usuario incorrecto')
+        }
+        const isCorrectPassword = await handleBcrypt.compare(data.password, resultUuser.password);
+        const token = await handleJwt.generate(resultUuser._id, resultUuser.user, resultUuser.role);
 
-const obtenerSession = async (req, res) => {
-    console.log('Obtener info session');
-    res.send('Obtener info session');
-}
+        if (isCorrectPassword) {
+            res.status(200);
+            res.send({
+                data: resultUuser,
+                token: token
+            })
+        } else {
+            res.status(400);
+            res.send('Nombre de usuario incorrecto')
+        }
 
-const eliminarSession = async (req, res) => {
-    console.log('Eliminacion de session');
-    res.send('Eliminacion de session');
+    } catch (error) {
+        console.log(error);
+        res.status(400);
+        res.send(error.message)
+    }
 }
 
 module.exports = {
-    insertarSession: insertarSession,
-    modificarSession: modificarSession,
-    obtenerSession: obtenerSession,
-    eliminarSession: eliminarSession
+    login: login,
 }

@@ -1,14 +1,11 @@
 const express = require('express');
+
 const sessionController = require('../controllers/sessionController');
+const autorizacion = require('../middlewares/autorizacion');
 
 const router = express.Router();
 
-router.post('/session', sessionController.insertarSession);
+router.post('/login',sessionController.login);
 
-router.put('/session', sessionController.modificarSession);
-
-router.get('/session', sessionController.obtenerSession);
-
-router.delete('/session', sessionController.eliminarSession);
 
 module.exports = router;

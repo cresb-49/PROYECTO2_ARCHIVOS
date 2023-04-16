@@ -6,7 +6,7 @@ const usuarioSchema = new Schema({
     user:String,
     password:String,
     role:String,
-    carrito:Array
+    token:String,
 },
 {
     versionKey:false

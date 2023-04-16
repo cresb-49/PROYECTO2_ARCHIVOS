@@ -1,3 +1,5 @@
+//Importar las variables de entorno a nivel local
+require('dotenv').config();
 //importancion de constantes de config
 const config = require('./config')
 
