@@ -29,7 +29,7 @@ const eliminarUsuario = async (req, res) => {
 }
 
 const obtenerUsuarios = async (req, res) => {
-    const usuarios = usuario.find();
+    const usuarios = await usuario.find();
     res.send(usuarios);
 }
 

@@ -9,9 +9,12 @@ const insertarArticulo = async (req, res) => {
         descripcion: req.body.descripcion,
         categoria: req.body.categoria
     });
-
-    const insertarArticulo = await insert();
-    res.send(insertarArticulo);
+    try {
+        const insertarArticulo = await insert();
+        res.send(insertarArticulo);
+    } catch (error) {
+        res.send({'error':error});
+    }
 }
 
 const obtenerArticulo = async (req, res) => {
@@ -30,7 +33,7 @@ const modificarArticulo = async (req, res) => {
 }
 
 const obtenerArticulos = async (req, res) => {
-    const articulos = articulo.find();
+    const articulos = await articulo.find();
     res.send(articulos);
 }
 
