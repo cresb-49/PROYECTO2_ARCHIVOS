@@ -46,7 +46,7 @@
 
 <script>
 export default {
-    name: 'IndexApp',
+    name: 'ArticulosApp',
     props: {
         // Propiedades del componente
     },

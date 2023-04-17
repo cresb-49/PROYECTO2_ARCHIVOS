@@ -4,6 +4,7 @@ const model = mongoose.model;
 
 const usuarioSchema = new Schema({
     user:String,
+    email:String,
     password:String,
     role:String,
     token:String,

@@ -16,6 +16,15 @@ const sessionRoutes = require('./routes/session.routes');
 const app = express();
 app.use(express.json());
 
+//Uso de CORS
+const cors = require('cors');
+const corsOptions ={
+    origin:'http://localhost:8080', //Permite la conexion del forntend 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
+
 //Funcion de inicio de la conexion de mongodb
 async function start() {
     try {

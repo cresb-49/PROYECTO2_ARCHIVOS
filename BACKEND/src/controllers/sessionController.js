@@ -9,7 +9,7 @@ const login = async (req, res) => {
         const resultUuser = await usuario.findOne({ user: data.user });
         if (!resultUuser) {
             res.status(400);
-            res.send('Nombre de usuario incorrecto')
+            res.send({mensaje:'Nombre de usuario incorrecto'});
         }
         const isCorrectPassword = await handleBcrypt.compare(data.password, resultUuser.password);
         const token = await handleJwt.generate(resultUuser._id, resultUuser.user, resultUuser.role);
@@ -30,13 +30,13 @@ const login = async (req, res) => {
             })
         } else {
             res.status(400);
-            res.send('Nombre de usuario incorrecto')
+            res.send({mensaje:'Contraseña incorrecta'})
         }
 
     } catch (error) {
         console.log(error);
         res.status(400);
-        res.send(error.message)
+        res.send({mensaje:error.message})
     }
 }
 

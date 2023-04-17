@@ -3,17 +3,23 @@ const handleBcrypt = require('../helpers/handleBcrypt');
 
 const insertarUsuario = async (req, res) => {
     try {
-        const password = await handleBcrypt.encrypt(req.body.password);
-        const insert = new usuario(
-            {
-                user: req.body.user,
-                password: password,
-                role: req.body.role
-            }
-        )
-        let insertarUsuario = await insert.save();
-        res.status(200);
-        res.send(insertarUsuario);
+        if (!(req.body.password === req.body.password2)) {
+            res.status(400);
+            res.send('Las contrasenias no son iguales');
+        }else{
+            const password = await handleBcrypt.encrypt(req.body.password);
+            const insert = new usuario(
+                {
+                    user: req.body.user,
+                    email:req.body.email,
+                    password: password,
+                    role: req.body.role
+                }
+            )
+            let insertarUsuario = await insert.save();
+            res.status(200);
+            res.send(insertarUsuario);
+        }
     } catch (error) {
         res.status(400);
         res.send(error.message);
