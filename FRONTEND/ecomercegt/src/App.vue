@@ -16,23 +16,23 @@ import LoginSingUpComonent from "./components/LoginSingUpComonent.vue";
 
 export default {
   name: 'App',
-  components:{
+  components: {
     HeaderApp,
     FooterApp,
     LoginSingUpComonent
     //IndexApp
   },
-  mounted(){
+  mounted() {
     this.axios.get('https://jsonplaceholder.typicode.com/users')
-    .then(response=>(this.info=response))
+      .then(response => (this.info = response))
     console.log(this.info);
   },
-  methods:{
+  methods: {
 
   },
-  data(){
-    return{
-      info:null
+  data() {
+    return {
+      info: null
     }
   }
 }
