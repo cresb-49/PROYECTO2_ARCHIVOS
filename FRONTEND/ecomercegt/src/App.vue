@@ -41,7 +41,7 @@
       </div>
     </nav>
   </div>
-  <div class="container">
+  <div class="container ventanaPrincipal" >
     <router-view></router-view>
   </div>
   <div class="contenedor">
@@ -147,7 +147,9 @@ export default {
   padding-left: 2%;
   padding-right: 2%;
 }
-
+.ventanaPrincipal{
+  min-height: 550px;
+}
 .contenedor {
   margin-left: 1%;
   margin-right: 1%;
