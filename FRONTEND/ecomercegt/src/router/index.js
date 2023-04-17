@@ -1,10 +1,10 @@
-import { createWebHashHistory,createRouter } from "vue-router";
+import { createWebHistory,createRouter} from "vue-router";
 import LoginSingUpComponent from '../components/LoginSingUpComponent.vue';
 import IndexView from '../views/IndexView.vue'
 
 const routes =[
     {
-        path:'/Index',
+        path:'/',
         name:'IndexView',
         component:IndexView
     },
@@ -16,7 +16,7 @@ const routes =[
 ];
 
 const router = createRouter({
-    history:createWebHashHistory(),
+    history:createWebHistory(),
     routes
 });
 

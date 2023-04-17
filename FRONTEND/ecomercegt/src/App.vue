@@ -10,19 +10,19 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
           <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
             <li class="nav-item">
-              <router-link class="nav-link active" aria-current="page" to="/Index">Home</router-link>
+              <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Link
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" >Action</a></li>
+                <li><a class="dropdown-item" >Another action</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" >Something else here</a></li>
               </ul>
             </li>
           </ul>
@@ -34,16 +34,23 @@
           </div>
           <div>
             <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <router-link class="btn btn-outline-success" to="/Login">Login</router-link>
+              <router-link v-if="!$store.state.isAuthenticated" class="btn btn-outline-success" to="/Login">Login</router-link>
+            </ul>
+          </div>
+          <div>
+            <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <a v-if="$store.state.isAuthenticated" @click="$store.commit('logout')" class="btn btn-outline-success">Logout</a>
             </ul>
           </div>
         </div>
       </div>
     </nav>
   </div>
+  
   <div class="container ventanaPrincipal" >
     <router-view></router-view>
   </div>
+  
   <div class="contenedor">
     <div class="blockcode">
       <footer class="page-footer shadow">
@@ -113,31 +120,8 @@
 </template>
 
 <script>
-//Sector de codigo js
-
-//import IndexApp from './components/IndexComponent.vue';
-import LoginSingUpComonent from "./components/LoginSingUpComponent.vue";
-
 export default {
-  name: 'App',
-  components: {
-    // eslint-disable-next-line vue/no-unused-components
-    LoginSingUpComonent
-    //IndexApp
-  },
-  mounted() {
-    this.axios.get('https://jsonplaceholder.typicode.com/users')
-      .then(response => (this.info = response))
-    console.log(this.info);
-  },
-  methods: {
-
-  },
-  data() {
-    return {
-      info: null
-    }
-  }
+  name: 'App'
 }
 </script>
 

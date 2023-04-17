@@ -41,14 +41,22 @@ export default {
                 user: this.user,
                 password: this.password
             }
-            this.axios.post('http://localhost:3000/api/login', data)
+            this.axios.post('/api/login', data)
                 .then(response => {
-                    //TODO:guardar las credenciales del usuario
+                    //TODO:guardar datos de usuario
+                    //Reinico de las variables del formulario
+                    this.user = null; this.password = null; 
                     const data = response.data;
                     console.log(data);
                     toast.success('Session iniciada');
-                    //Reinico de las variables del formulario
-                    this.user = null; this.password = null;
+                    this.axios.defaults.headers.common['Authorization']='Bearer '+data.token;
+                    localStorage.setItem('token',data.token);
+                    this.$store.commit('setAuthenticated',true);
+                    this.$store.commit('setUser',data.data.user);
+                    this.$store.commit('setId',data.data._id);
+                    this.$store.commit('setRole',data.data.role);
+                    //Redireccion de
+                    this.$router.push('/Index');
                 })
                 .catch(response => {
                     //Mensaje de error por el response

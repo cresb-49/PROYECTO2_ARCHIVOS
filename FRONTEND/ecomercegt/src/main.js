@@ -9,7 +9,13 @@ import VueAxios from 'vue-axios';
 
 import router from './router'
 
+import storage from './storage';
 
-createApp(App).use(router).use(VueAxios,axios).mount('#app')
+axios.defaults.baseURL='http://localhost:3000';
+
+let token = localStorage.getItem('token');
+axios.defaults.headers.common['Authorization']='Bearer '+token;
+
+createApp(App).use(router).use(storage).use(VueAxios,axios).mount('#app')
 
 import 'bootstrap/dist/js/bootstrap.js'

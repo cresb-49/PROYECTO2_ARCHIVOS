@@ -57,7 +57,7 @@ export default {
                 password2: this.password2,
                 role: 'USUARIO'
             }
-            this.axios.post('http://localhost:3000/api/usuario', data)
+            this.axios.post('/api/usuario', data)
                 .then(response => {
                     console.log(response.data);
                     toast.success('Registro correcto!!!');
