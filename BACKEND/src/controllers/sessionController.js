@@ -14,10 +14,18 @@ const login = async (req, res) => {
         const isCorrectPassword = await handleBcrypt.compare(data.password, resultUuser.password);
         const token = await handleJwt.generate(resultUuser._id, resultUuser.user, resultUuser.role);
 
+        await usuario.updateOne({
+            _id: resultUuser._id
+        },
+            {
+                $set: {
+                    token: token
+                }
+            });
         if (isCorrectPassword) {
             res.status(200);
             res.send({
-                data: resultUuser,
+                data: { _id: resultUuser._id, user: resultUuser.user, role: resultUuser.role },
                 token: token
             })
         } else {
