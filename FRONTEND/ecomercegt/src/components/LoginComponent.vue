@@ -56,7 +56,7 @@ export default {
                     this.$store.commit('setId',data.data._id);
                     this.$store.commit('setRole',data.data.role);
                     //Redireccion de
-                    this.$router.push('/Index');
+                    this.$router.push('/');
                 })
                 .catch(response => {
                     //Mensaje de error por el response

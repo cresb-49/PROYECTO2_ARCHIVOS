@@ -12,45 +12,63 @@
             <li class="nav-item">
               <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Link
+            <li class="nav-item">
+              <router-link class="nav-link active" aria-current="page" to="/">Seguimiento</router-link>
+            </li>
+            <li class="nav-item dropdown" v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'">
+              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Productos
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" >Action</a></li>
-                <li><a class="dropdown-item" >Another action</a></li>
+                <li><a class="dropdown-item">Ventas</a></li>
+                <li><a class="dropdown-item">Vender Nuevo Producto</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" >Something else here</a></li>
+                <li><a class="dropdown-item">Actulizar Producto</a></li>
               </ul>
             </li>
+            <li class="nav-item dropdown" v-if="$store.state.isAuthenticated && $store.state.role === 'ADMIN'">
+              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Empleados
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item">Registro Empleado Paqueteria</a></li>
+                <li><a class="dropdown-item">Registro Adminitrador</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'ADMIN'" class="nav-link active" aria-current="page" to="/">Reportes</router-link>
+            </li>
           </ul>
-          <div class="container">
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>            
-          </div>
-          <div>
+          <div style="margin-right: 10px;">
             <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <router-link v-if="!$store.state.isAuthenticated" class="btn btn-outline-success" to="/Login">Login</router-link>
+              <a v-if="$store.state.isAuthenticated" class="btn btn-outline-success material-icons"><span
+                  class="">shopping_cart</span></a>
             </ul>
           </div>
           <div>
             <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <a v-if="$store.state.isAuthenticated" @click="$store.commit('logout')" class="btn btn-outline-success">Logout</a>
+              <router-link v-if="!$store.state.isAuthenticated" class="btn btn-outline-success"
+                to="/Login">Login</router-link>
             </ul>
           </div>
+          <div>
+            <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <a v-if="$store.state.isAuthenticated" @click="$store.commit('logout')"
+                class="btn btn-outline-success">Logout</a>
+            </ul>
+          </div>
+
         </div>
       </div>
     </nav>
   </div>
-  
-  <div class="container ventanaPrincipal" >
+
+  <div class="container ventanaPrincipal">
     <router-view></router-view>
   </div>
-  
+
   <div class="contenedor">
     <div class="blockcode">
       <footer class="page-footer shadow">
@@ -131,9 +149,11 @@ export default {
   padding-left: 2%;
   padding-right: 2%;
 }
-.ventanaPrincipal{
+
+.ventanaPrincipal {
   min-height: 550px;
 }
+
 .contenedor {
   margin-left: 1%;
   margin-right: 1%;
