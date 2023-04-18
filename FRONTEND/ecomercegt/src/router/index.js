@@ -1,13 +1,13 @@
 import { createWebHistory,createRouter} from "vue-router";
 import LoginSingUpComponent from '../components/LoginSingUpComponent.vue';
-import IndexView from '../views/IndexView.vue'
+import VistaProductosCoponent from '../components/VistaProductosComponent';
 import NuevoArticuloComponent from '../components/NuevoArticuloComponent.vue'
 
 const routes =[
     {
         path:'/',
-        name:'IndexView',
-        component:IndexView
+        name:'VistaProductosCoponent',
+        component:VistaProductosCoponent
     },
     {
         path:'/Login',
