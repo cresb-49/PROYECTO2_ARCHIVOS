@@ -102,7 +102,6 @@ export default {
     },
     mounted() {
         this.usuario = JSON.parse(localStorage.getItem('vuex')).user;
-        this.setImage = false;
     },
     methods: {
         generarArticulo() {
