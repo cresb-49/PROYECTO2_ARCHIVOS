@@ -5,12 +5,20 @@ const usuario = require('../models/usuario');
 const login = async (req, res) => {
     try {
         const data = req.body;
-
         const resultUuser = await usuario.findOne({ user: data.user });
+
+        if (resultUuser === null) {
+            res.status(400);
+            res.send({ mensaje: 'Credenciales incorrectas' });
+            return;
+        }
+
         if (!resultUuser) {
             res.status(400);
-            res.send({mensaje:'Nombre de usuario incorrecto'});
+            res.send({ mensaje: 'Nombre de usuario incorrecto' });
+            return;
         }
+
         const isCorrectPassword = await handleBcrypt.compare(data.password, resultUuser.password);
         const token = await handleJwt.generate(resultUuser._id, resultUuser.user, resultUuser.role);
 
@@ -30,13 +38,12 @@ const login = async (req, res) => {
             })
         } else {
             res.status(400);
-            res.send({mensaje:'Contraseña incorrecta'})
+            res.send({ mensaje: 'Contraseña incorrecta' })
         }
 
     } catch (error) {
-        console.log(error);
         res.status(400);
-        res.send({mensaje:error.message})
+        res.send({ mensaje: error.message })
     }
 }
 
