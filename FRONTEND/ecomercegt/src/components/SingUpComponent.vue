@@ -37,15 +37,14 @@ import 'vue3-toastify/dist/index.css';
 
 export default {
     name: 'SignUpApp',
-    props: {
-        // Propiedades del componente
-    },
+    props: ['typeRole'],
     data() {
         return {
             user: null,
             email: null,
             password: null,
-            password2: null
+            password2: null,
+            role:'USUARIO'
         }
     },
     methods: {
@@ -55,7 +54,7 @@ export default {
                 email: this.email,
                 password: this.password,
                 password2: this.password2,
-                role: 'USUARIO'
+                role: this.role
             }
             this.axios.post('/api/usuario', data)
                 .then(response => {
@@ -72,6 +71,11 @@ export default {
     },
     mounted() {
         // Código que se ejecuta cuando el componente se monta en la página
+    },
+    created(){
+        if(this.typeRole){
+            this.role = this.typeRole;
+        }
     }
 }
 </script>
