@@ -13,7 +13,7 @@
               <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link active" aria-current="page" to="/">Seguimiento</router-link>
+              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'" class="nav-link active" aria-current="page" to="/">Seguimiento</router-link>
             </li>
             <li class="nav-item dropdown" v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'">
               <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -21,7 +21,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item">Ventas</a></li>
-                <li><a class="dropdown-item">Vender Nuevo Producto</a></li>
+                <li><router-link to="/NuevoArticulo" class="dropdown-item">Vender Articulo</router-link></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
