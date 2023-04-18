@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <h4>Administrador</h4>
+        <h4>Empleado Paqueteria</h4>
         <div class="sombra">
-            <SingUpComponent type-role="ADMIN" ></SingUpComponent>
+            <SingUpComponent type-role="PAQUETERIA" ></SingUpComponent>
         </div>
     </div>
 </template>
@@ -17,7 +17,7 @@ export default{
     },
     data(){
         return{
-            role:'ADMIN'
+            role:'PAQUETERIA'
         }
     }
 }

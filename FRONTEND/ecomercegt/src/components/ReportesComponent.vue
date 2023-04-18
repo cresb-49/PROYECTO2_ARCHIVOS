@@ -1,11 +1,11 @@
 <template>
     <div>
-        <h1>Seguimiento</h1>
+        <h1>Reportes</h1>
     </div>
 </template>
 
 <script>
 export default{
-    name:'EstadoCompra'
+    name:'ReportesComponent'
 }
 </script>
