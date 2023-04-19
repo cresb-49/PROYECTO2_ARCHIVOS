@@ -37,9 +37,17 @@ const eliminarArticulo = async (req, res) => {
     res.send('Eliminar Articulo');
 }
 
-const modificarArticulo = async (req, res) => {
-    console.log('Modificar Articulo');
-    res.send('Modificar Articulo');
+const aceptarArticulo = async (req, res) => {
+    const filter = { _id: (req.body.id === undefined ? req.query.id : req.body.id) }
+    const update = { aceptado: (req.body.aceptado === undefined ? req.query.aceptado : req.body.aceptado) }
+    try {
+        const result = await articulo.findOneAndUpdate(filter,update);
+        res.status(200);
+        res.send(result);
+    } catch (error) {
+        res.status(409);
+        res.send({error:error.message});
+    }
 }
 
 const obtenerArticulos = async (req, res) => {
@@ -52,5 +60,5 @@ module.exports = {
     obtenerArticulo: obtenerArticulo,
     obtenerArticulos: obtenerArticulos,
     eliminarArticulo: eliminarArticulo,
-    modificarArticulo: modificarArticulo
+    aceptarArticulo: aceptarArticulo
 }

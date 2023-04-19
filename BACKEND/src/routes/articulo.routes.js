@@ -6,9 +6,9 @@ const {valideCreate} = require('../validators/articulo');
 
 const router = express.Router();
 
-router.post('/articulo', valideCreate, artiuloController.insertarArticulo);
+router.post('/articulo',autorizacion.auth, valideCreate, artiuloController.insertarArticulo);
 
-router.put('/articulo', artiuloController.modificarArticulo);
+router.put('/articulo',autorizacion.auth,artiuloController.aceptarArticulo);
 
 router.get('/articulo', artiuloController.obtenerArticulo);
 

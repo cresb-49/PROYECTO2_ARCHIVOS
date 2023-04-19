@@ -37,6 +37,23 @@ const obtenerVentas = async (req, res) => {
     }
 }
 
+const getAllVentas = async (req, res) => {
+    try {
+        let data = []
+        const result = await venta.find();
+        for (const v of result) {
+            const filter = { _id: v.articulo };
+            const r = await articulo.findOne(filter)
+            data.push({ articulo: r, venta: v });
+        };
+        res.status(200);
+        res.send(data);
+    } catch (error) {
+        res.status(409);
+        res.send({ 'error': error.message });
+    }
+}
+
 const modificarEstados = async (req, res) => {
     const filter = { _id: (req.body.id === undefined ? req.query.id : req.body.id) }
     const update = {
@@ -55,9 +72,27 @@ const modificarEstados = async (req, res) => {
 
 }
 
+const obtenerVenta = async (req, res) => {
+    const filter = { _id: (req.body.id === undefined ? req.query.id : req.body.id) };
+    try {
+        //console.log(filter);
+        const result = await venta.findOne(filter);
+        const filter2 = { _id: result.articulo };
+        const r2 = await articulo.findOne(filter2)
+        let data = { articulo: r2, venta: result };
+        res.status(200);
+        res.send(data);
+    } catch (error) {
+        res.status(409);
+        res.send({ 'error': error.message });
+    }
+}
+
 
 module.exports = {
     insertarVenta: insertarVenta,
     obtenerVentas: obtenerVentas,
-    modificarEstados:modificarEstados
+    modificarEstados: modificarEstados,
+    obtenerVenta:obtenerVenta,
+    getAllVentas:getAllVentas
 }

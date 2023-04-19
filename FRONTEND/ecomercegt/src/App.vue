@@ -41,10 +41,10 @@
               <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'ADMIN'" class="nav-link active" aria-current="page" to="/Reportes">Reportes</router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'PAQUETERIA'" class="nav-link active" aria-current="page" to="/Reportes">Aceptar Producto</router-link>
+              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'PAQUETERIA'" class="nav-link active" aria-current="page" to="/AceptarArticulo">Aceptar Producto</router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'PAQUETERIA'" class="nav-link active" aria-current="page" to="/Reportes">Cambiar Estado</router-link>
+              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'PAQUETERIA'" class="nav-link active" aria-current="page" to="/CambiarEstado">Cambiar Estado</router-link>
             </li>
           </ul>
           <div style="margin-right: 10px;">

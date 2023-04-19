@@ -8,6 +8,10 @@ import RegistroAdministradorComponent from '../components/RegistroAdministradorC
 import RegistroEmpleadoComponent from '../components/RegistroEmpleadoComponent.vue'
 import ReportesComponent from  '../components/ReportesComponent.vue'
 import VerArticuloComponent from '../components/VerArticuloComponent.vue';
+import ListaVentasComponent from '../components/ListaVentasComponent.vue';
+import ListaArticulosEntradaComponent from '../components/ListaArticulosEntradaComponent.vue';
+import cambiarEstadoComponent from '../components/cambiarEstadoComponent.vue';
+import VerificarArticuloComponene from '../components/VerificarArticuloComponene.vue';
 
 const routes = [
     {
@@ -59,12 +63,24 @@ const routes = [
     {
         path:'/AceptarArticulo',
         name:'AceptarArticulo',
-        component:VerArticuloComponent,
+        component:ListaArticulosEntradaComponent
     },
     {
         path:'/CambiarEstado',
         name:'CambiarEstado',
-        component:VerArticuloComponent,
+        component:ListaVentasComponent
+    },
+    {
+        path:'/ModificarEstado/:id',
+        name:'ModificarEstado',
+        component:cambiarEstadoComponent,
+        props:true
+    },
+    {
+        path:'/VerificarArticulo/:id',
+        name:'VerificarArticulo',
+        component:VerificarArticuloComponene,
+        props:true
     }
 ];
 
