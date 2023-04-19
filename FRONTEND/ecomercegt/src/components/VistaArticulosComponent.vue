@@ -3,7 +3,9 @@
     <div id="contenedorProductos" style="margin-top: 20px;">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div v-for="articulo in articulos" :key="articulo._1d">
-                <CardArticulo :articulo="{codigo: articulo._id,usuario: articulo.usuario,nombre: articulo.nombre,precio: articulo.precio,imagen: articulo.imagen,descripcion: articulo.descripcion,categoria: articulo.categoria}"></CardArticulo>
+                <div v-if="!articulo.vendido">
+                    <CardArticulo :articulo="{codigo: articulo._id,usuario: articulo.usuario,nombre: articulo.nombre,precio: articulo.precio,imagen: articulo.imagen,descripcion: articulo.descripcion,categoria: articulo.categoria}"></CardArticulo>
+                </div>
             </div>
         </div>
     </div>

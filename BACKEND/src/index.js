@@ -12,6 +12,7 @@ const usuarioRoutes = require('./routes/usuario.routes');
 const articuloRoutes = require('./routes/articulo.routes');
 const sessionRoutes = require('./routes/session.routes');
 const carritoRoutes = require('./routes/carrito.routes');
+const ventaRoutes = require('./routes/venta.routes');
 
 //Inicio de la app express
 const app = express();
@@ -46,6 +47,7 @@ app.use('/api',usuarioRoutes);
 app.use('/api',articuloRoutes);
 app.use('/api',sessionRoutes);
 app.use('/api',carritoRoutes);
+app.use('/api',ventaRoutes);
 
 //Inicio de la conexion de la base de datos
 start();

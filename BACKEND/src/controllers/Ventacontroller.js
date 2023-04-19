@@ -1,0 +1,63 @@
+const venta = require('../models/venta');
+const articulo = require('../models/articulo');
+
+const insertarVenta = async (req, res) => {
+    const insert = new venta({
+        usuario: req.body.usuario,
+        articulo: req.body.articulo,
+        valor: req.body.valor,
+        isCentro: req.body.isCentro,
+        isCamino: req.body.isCamino,
+        isHome: req.body.isHome
+    });
+    try {
+        const insertarVenta = await insert.save();
+        res.status(200);
+        res.send(insertarVenta);
+    } catch (error) {
+        res.status(409);
+        res.send({ 'error': error.message });
+    }
+}
+const obtenerVentas = async (req, res) => {
+    const filter = { usuario: (req.body.usuario === undefined ? req.query.usuario : req.body.usuario) };
+    try {
+        let data = []
+        const result = await venta.find(filter);
+        for (const v of result) {
+            const filter = { _id: v.articulo };
+            const r = await articulo.findOne(filter)
+            data.push({ articulo: r, venta: v });
+        };
+        res.status(200);
+        res.send(data);
+    } catch (error) {
+        res.status(409);
+        res.send({ 'error': error.message });
+    }
+}
+
+const modificarEstados = async (req, res) => {
+    const filter = { _id: (req.body.id === undefined ? req.query.id : req.body.id) }
+    const update = {
+        isCentro: (req.body.isCentro === undefined ? req.query.isCentro : req.body.isCentro),
+        isCamino: (req.body.isCamino === undefined ? req.query.isCamino : req.body.isCamino),
+        isHome: (req.body.isHome === undefined ? req.query.isHome : req.body.isHome)
+    }
+    try {
+        let result = await articulo.findOneAndUpdate(filter, update);
+        res.status(200);
+        res.send(result);
+    } catch (error) {
+        res.status(409);
+        res.send({ 'error': error.message });
+    }
+
+}
+
+
+module.exports = {
+    insertarVenta: insertarVenta,
+    obtenerVentas: obtenerVentas,
+    modificarEstados:modificarEstados
+}

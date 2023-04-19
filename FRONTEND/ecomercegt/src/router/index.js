@@ -55,6 +55,16 @@ const routes = [
         name:'Articulo',
         component:VerArticuloComponent,
         props:true
+    },
+    {
+        path:'/AceptarArticulo',
+        name:'AceptarArticulo',
+        component:VerArticuloComponent,
+    },
+    {
+        path:'/CambiarEstado',
+        name:'CambiarEstado',
+        component:VerArticuloComponent,
     }
 ];
 

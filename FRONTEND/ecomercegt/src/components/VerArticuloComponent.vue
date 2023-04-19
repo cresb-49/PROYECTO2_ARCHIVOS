@@ -60,26 +60,37 @@ export default {
                 usuario: this.$store.state.user,
                 producto: id
             }
-            this.axios.put('/api/carrito/articulo',payload)
-            .then(response=>{
-                if(response.data.modifiedCount === 0){
-                    toast.warning('Este articulo ya esta en el carrito!!!');
-                }else{
-                    toast.success('Se ingreso con exito en el carrito!!!');
-                }
-            })
-            .catch(response=>{
-                console.log(response.response.data.error);
-                toast.error(response.response.data.error)
-            })
+            this.axios.put('/api/carrito/articulo', payload)
+                .then(response => {
+                    if (response.data.modifiedCount === 0) {
+                        toast.warning('Este articulo ya esta en el carrito!!!');
+                    } else {
+                        toast.success('Se ingreso con exito en el carrito!!!');
+                    }
+                })
+                .catch(response => {
+                    console.log(response.response.data.error);
+                    toast.error(response.response.data.error)
+                })
         },
         procesarCompra() {
             let id = this.articulo._id;
             let payload = {
                 usuario: this.$store.state.user,
-                producto: { _id: id, precio: this.articulo.precio }
+                articulo: id,
+                valor: this.articulo.precio,
+                isCentro: true,
+                isCamino: false,
+                isHome: false
             }
-            console.log('porducto comprar:', payload);
+            this.axios.post('/api/venta', payload)
+            // eslint-disable-next-line no-unused-vars
+            .then(response=>{
+                toast.success('Compra realizada con exito!!!')
+            })  
+            .catch(response=>{
+                toast.error('Error en compra!!!\n'+response.response.data.error)
+            })
         }
     }
 }
