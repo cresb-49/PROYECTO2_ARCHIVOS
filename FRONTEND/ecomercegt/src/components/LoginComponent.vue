@@ -55,7 +55,7 @@ export default {
                     this.$store.commit('setUser',data.data.user);
                     this.$store.commit('setId',data.data._id);
                     this.$store.commit('setRole',data.data.role);
-                    //Redireccion de
+                    //Redireccion al inicio de la pagina
                     this.$router.push('/');
                 })
                 .catch(response => {

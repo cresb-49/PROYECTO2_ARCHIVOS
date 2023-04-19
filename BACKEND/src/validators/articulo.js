@@ -34,7 +34,7 @@ const valideCreate = [
         .isString()
         .not()
         .isEmpty(),
-    check('categoria')
+    check('categoria')//TODO: Mejorar la verificacion de las categorias
         .exists()
         .isLength()
         .not()

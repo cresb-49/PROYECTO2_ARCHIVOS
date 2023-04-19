@@ -15,13 +15,21 @@ const insertarArticulo = async (req, res) => {
         res.send(insertarArticulo);
     } catch (error) {
         res.status(409);
-        res.send({'error':error.message});
+        res.send({ 'error': error.message });
     }
 }
 
 const obtenerArticulo = async (req, res) => {
-    console.log('Obtener Articulo');
-    res.send('Obtener Articulo');
+    let find = req.query;
+    //console.log(find)
+    try {
+        const result = await articulo.findById(find);
+        res.status(200);
+        res.send(result);
+    } catch (error) {
+        res.status(409);
+        res.send({ 'error': error.message });
+    }
 }
 
 const eliminarArticulo = async (req, res) => {

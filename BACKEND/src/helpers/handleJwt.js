@@ -4,7 +4,7 @@ const config = require('../config')
 const generate = async (id, user, role) => {
     const payload = { id, user, role };
     return jwt.sign(payload, config.PRIVATE_KEY, {
-        expiresIn: 300, //TODO: cambiar el tiempo de duracion de los tokens
+        expiresIn: 60*60, //TODO: cambiar el tiempo de duracion de los tokens
     });
 };
 

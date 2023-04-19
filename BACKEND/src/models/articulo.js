@@ -8,7 +8,15 @@ const articuloSchema = new Schema({
     precio:Number,
     imagen:Object,
     descripcion:String,
-    categoria:Array
+    categoria:Array,
+    aceptado: {
+        type: Boolean,
+        default: false
+    },
+    vendido: {
+        type: Boolean,
+        default: false
+    }
 },
 {
     versionKey:false
