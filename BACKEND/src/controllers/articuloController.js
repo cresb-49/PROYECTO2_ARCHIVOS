@@ -10,10 +10,12 @@ const insertarArticulo = async (req, res) => {
         categoria: req.body.categoria
     });
     try {
-        const insertarArticulo = await insert();
+        const insertarArticulo = await insert.save();
+        res.status(200);
         res.send(insertarArticulo);
     } catch (error) {
-        res.send({'error':error});
+        res.status(409);
+        res.send({'error':error.message});
     }
 }
 

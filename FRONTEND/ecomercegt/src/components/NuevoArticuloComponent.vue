@@ -82,6 +82,8 @@
 </template>
 
 <script>
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css';
 export default {
     name: 'NuevoArticulo',
     data() {
@@ -127,7 +129,7 @@ export default {
             }
 
             // eslint-disable-next-line no-unused-vars
-            let obj = {
+            let payloand = {
                 usuario: this.usuario,
                 nombre: this.nombre,
                 precio: this.precio,
@@ -135,8 +137,19 @@ export default {
                 descripcion: this.descripcion,
                 categoria: cate
             }
-            console.log(obj);
+            console.log(payloand);
             console.log(this.img);
+            this.axios.post('/api/articulo',payloand)
+            .then(response=>{
+                console.log(response);
+                toast.success('Registro Exitoso!!! \nNuevo producto en venta');
+                this.$router.push({name:'Articulo',params:{id:response.data._id}});
+            })
+            .catch(response=>{
+                console.log(response);
+                const data = response.response.data;
+                toast.error(data.mensaje);
+            })
         },
         manejoImagen(e) {
             let vu = this.$data;
