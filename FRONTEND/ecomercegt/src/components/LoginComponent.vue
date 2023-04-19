@@ -43,7 +43,6 @@ export default {
             }
             this.axios.post('/api/login', data)
                 .then(response => {
-                    //TODO:guardar datos de usuario
                     //Reinico de las variables del formulario
                     this.user = null; this.password = null; 
                     const data = response.data;
