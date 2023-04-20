@@ -3,6 +3,8 @@ require('dotenv').config();
 //importancion de constantes de config
 const config = require('./config')
 
+const parser = require('body-parser')
+
 //Importando las libreria necesarias para express y la conexion a la base de datos
 const express = require('express');
 const mongoose = require('mongoose');
@@ -16,7 +18,8 @@ const ventaRoutes = require('./routes/venta.routes');
 
 //Inicio de la app express
 const app = express();
-app.use(express.json());
+app.use(parser.json());
+app.use(parser.urlencoded({extended:true}));
 
 //Uso de CORS
 const cors = require('cors');

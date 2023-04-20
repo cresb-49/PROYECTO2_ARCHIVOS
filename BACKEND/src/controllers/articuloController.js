@@ -41,18 +41,28 @@ const aceptarArticulo = async (req, res) => {
     const filter = { _id: (req.body.id === undefined ? req.query.id : req.body.id) }
     const update = { aceptado: (req.body.aceptado === undefined ? req.query.aceptado : req.body.aceptado) }
     try {
-        const result = await articulo.findOneAndUpdate(filter,update);
+        const result = await articulo.findOneAndUpdate(filter, update);
         res.status(200);
         res.send(result);
     } catch (error) {
         res.status(409);
-        res.send({error:error.message});
+        res.send({ error: error.message });
     }
 }
 
 const obtenerArticulos = async (req, res) => {
-    const articulos = await articulo.find();
-    res.send(articulos);
+    const nombre = (req.body.nombre === undefined ? req.query.nombre : req.body.nombre);
+
+    if(nombre){
+        const articulos = await articulo.find({"nombre":new RegExp(nombre,'i')});
+        res.status(200);
+        res.send(articulos);
+
+    }else{
+        const articulos = await articulo.find();
+        res.status(200);
+        res.send(articulos);
+    }
 }
 
 module.exports = {
