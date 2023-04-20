@@ -23,7 +23,7 @@ const obtenerArticulo = async (req, res) => {
     let find = req.query;
     //console.log(find)
     try {
-        const result = await articulo.findById(find);
+        const result = await articulo.findById(find).select('-imagen');
         res.status(200);
         res.send(result);
     } catch (error) {

@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <img :src="d.articulo.imagen" alt="Imagen de ejemplo" class="img-fluid">
+                            <img :src="'http://localhost:3000/ecommercegt/img?id='+d.articulo._id" alt="Imagen de ejemplo" class="img-fluid">
                         </div>
                         <div class="col-md-8">
                             <h5 class="card-title">{{ d.articulo.nombre }}</h5>

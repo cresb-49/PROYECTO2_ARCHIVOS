@@ -7,13 +7,13 @@
     </div>
     <div id="contenedorProductos" style="margin-top: 20px;">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div v-for="articulo in articulos" :key="articulo._1d">
-                <div v-if="!articulo.vendido && articulo.aceptado">
+            <template v-for="articulo in articulos" :key="articulo._1d">
+                <template v-if="!articulo.vendido && articulo.aceptado">
                     <CardArticulo
                         :articulo="{ codigo: articulo._id, usuario: articulo.usuario, nombre: articulo.nombre, precio: articulo.precio, imagen: articulo.imagen, descripcion: articulo.descripcion, categoria: articulo.categoria }">
                     </CardArticulo>
-                </div>
-            </div>
+                </template>
+            </template>
         </div>
     </div>
 </template>

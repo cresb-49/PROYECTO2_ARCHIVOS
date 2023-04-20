@@ -26,7 +26,7 @@ const obtenerVentas = async (req, res) => {
         const result = await venta.find(filter);
         for (const v of result) {
             const filter = { _id: v.articulo };
-            const r = await articulo.findOne(filter)
+            const r = await articulo.findOne(filter).select('-imagen');
             data.push({ articulo: r, venta: v });
         };
         res.status(200);
@@ -43,7 +43,7 @@ const getAllVentas = async (req, res) => {
         const result = await venta.find();
         for (const v of result) {
             const filter = { _id: v.articulo };
-            const r = await articulo.findOne(filter)
+            const r = await articulo.findOne(filter).select('-imagen')
             data.push({ articulo: r, venta: v });
         };
         res.status(200);

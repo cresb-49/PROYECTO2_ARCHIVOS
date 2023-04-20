@@ -4,7 +4,7 @@
         <button class="btn btn-primary mb-3" @click="comparCarrito">Comprar todo el carrito</button>
         <div v-for="articulo in articulos" v-bind:key="articulo">
             <div class="card mb-3" style="max-width: 300px;">
-                <img :src="articulo.imagen" alt="Placeholder Image" style="max-width: 300px; margin: 5px; border-radius: 5px;" align="center">
+                <img :src="'http://localhost:3000/ecommercegt/img?id='+articulo._id" alt="Placeholder Image" style="max-width: 300px; margin: 5px; border-radius: 5px;" align="center">
                 <div class="card-body">
                     <h5 class="card-title">{{ articulo.nombre }}</h5>
                     <p class="card-text">{{ articulo.descripcion }}</p>

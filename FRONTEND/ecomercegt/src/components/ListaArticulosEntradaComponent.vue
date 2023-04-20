@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-3">
-                            <img :src="articulo.imagen" class="img-fluid" alt="Imagen del producto">
+                            <img :src="'http://localhost:3000/ecommercegt/img?id='+articulo._id" class="img-fluid" alt="Imagen del producto">
                         </div>
                         <div class="col-9">
                             <h5 class="card-title">{{articulo.nombre}}</h5>
