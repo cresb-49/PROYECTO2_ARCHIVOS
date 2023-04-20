@@ -40,7 +40,6 @@ export default {
             this.axios.get(`/api/articulos?nombre=${payload.nombre}`, payload)
                 .then(response => {
                     const res = response.data
-                    console.log(res);
                     vu.articulos = res;
                 })
                 .catch(response => {
@@ -52,12 +51,10 @@ export default {
         this.axios.get('/api/articulos')
             .then(response => {
                 this.articulos = response.data;
-                console.log(response.data);
             })
             .catch(response => {
                 console.log(response);
             })
     }
-
 }
 </script>
