@@ -1,7 +1,7 @@
 <template>
     <div>
         <div align="center">
-            <img :src="articulo.imagen" alt="Imagen del Articulo" style="max-width: 100%;">
+            <img :src="'http://localhost:3000/ecommercegt/img?id='+articulo._id" alt="Imagen del Articulo" style="max-width: 100%;">
         </div>
         <h4 style="margin-top: 20px;">{{ articulo.nombre }}</h4>
         <p>{{ articulo.descripcion }}</p>
