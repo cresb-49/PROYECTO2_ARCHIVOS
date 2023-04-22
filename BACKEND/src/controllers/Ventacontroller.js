@@ -54,9 +54,13 @@ const getAllVentas = async (req, res) => {
         let data = []
         const result = await venta.find();
         for (const v of result) {
-            const filter = { _id: v.articulo };
-            const r = await articulo.findOne(filter).select('-imagen')
-            data.push({ articulo: r, venta: v });
+            let articulos = [];
+            for (const id of v.articulos) {
+                const filter2 = { _id: id };
+                const r = await articulo.findOne(filter2).select('-imagen');
+                articulos.push(r);
+            }
+            data.push({ articulos: articulos, venta: v });
         };
         res.status(200);
         res.send(data);
@@ -67,14 +71,12 @@ const getAllVentas = async (req, res) => {
 }
 
 const modificarEstados = async (req, res) => {
-    const filter = { _id: (req.body.id === undefined ? req.query.id : req.body.id) }
-    const update = {
-        isCentro: (req.body.isCentro === undefined ? req.query.isCentro : req.body.isCentro),
-        isCamino: (req.body.isCamino === undefined ? req.query.isCamino : req.body.isCamino),
-        isHome: (req.body.isHome === undefined ? req.query.isHome : req.body.isHome)
-    }
+    const body = req.body;
+
+    const update = body.estados;
+    const filter = { _id: body.id }
     try {
-        let result = await articulo.findOneAndUpdate(filter, update);
+        let result = await venta.findOneAndUpdate(filter, update);
         res.status(200);
         res.send(result);
     } catch (error) {
@@ -87,11 +89,14 @@ const modificarEstados = async (req, res) => {
 const obtenerVenta = async (req, res) => {
     const filter = { _id: (req.body.id === undefined ? req.query.id : req.body.id) };
     try {
-        //console.log(filter);
         const result = await venta.findOne(filter);
-        const filter2 = { _id: result.articulo };
-        const r2 = await articulo.findOne(filter2)
-        let data = { articulo: r2, venta: result };
+        let articulos = [];
+        for (const id of result.articulos) {
+            const filter2 = { _id: id };
+            const r = await articulo.findOne(filter2).select('-imagen');
+            articulos.push(r);
+        }
+        let data = { venta: result, articulos: articulos };
         res.status(200);
         res.send(data);
     } catch (error) {

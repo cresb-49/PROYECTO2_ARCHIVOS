@@ -9,8 +9,11 @@ const router = express.Router();
 router.post('/venta',autorizacion.auth,venderProducto,ventaController.insertarVenta);
 
 router.get('/ventas',autorizacion.auth,ventaController.obtenerVentas);
+
 router.get('/ventas/all',autorizacion.auth,ventaController.getAllVentas);
 
 router.get('/venta',autorizacion.auth,ventaController.obtenerVenta);
+
+router.put('/venta',autorizacion.auth,ventaController.modificarEstados);
 
 module.exports = router;

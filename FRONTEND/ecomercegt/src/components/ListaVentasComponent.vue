@@ -5,11 +5,15 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-3">
-                            <img :src="'http://localhost:3000/ecommercegt/img?id='+d.articulo._id" class="img-fluid" alt="Imagen del producto">
+                            <CarruselVue :articulos="d.articulos" ></CarruselVue>
                         </div>
                         <div class="col-9">
-                            <h5 class="card-title">{{d.articulo.nombre}}</h5>
-                            <p class="card-text">{{d.articulo.descripcion}}</p>
+                            <h5 class="card-title">Articulos</h5>
+                            <template v-for="a in d.articulos" v-bind:key="a">
+                                <ul>
+                                    <li>{{ a.nombre }}</li>
+                                </ul>
+                            </template>
                             <button @click="verificarArticulo(d.venta)" class="btn btn-primary float-right">Modificar Estado</button>
                         </div>
                     </div>
@@ -21,9 +25,12 @@
 
 <script>
 import { toast } from 'vue3-toastify';
-
+import CarruselVue from './CarruselVue.vue'
 export default {
     name: 'ListaVentas',
+    components:{
+        CarruselVue
+    },
     data() {
         return{
             data:[]

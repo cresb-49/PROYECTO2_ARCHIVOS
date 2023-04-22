@@ -13,19 +13,16 @@
               <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'" class="nav-link active" aria-current="page" to="/Seguimiento">Seguimiento</router-link>
+              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'" class="nav-link active"
+                aria-current="page" to="/Seguimiento">Seguimiento</router-link>
             </li>
             <li class="nav-item dropdown" v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'">
               <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Productos
+                Articulos
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item">Ventas</a></li>
+                <li><a class="dropdown-item">Articulos</a></li>
                 <li><router-link to="/NuevoArticulo" class="dropdown-item">Vender Articulo</router-link></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item">Actulizar Producto</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown" v-if="$store.state.isAuthenticated && $store.state.role === 'ADMIN'">
@@ -33,27 +30,32 @@
                 Empleados
               </a>
               <ul class="dropdown-menu">
-                <li><router-link to="/RegistroEmpleado" class="dropdown-item">Registro Empleado Paqueteria</router-link></li>
+                <li><router-link to="/RegistroEmpleado" class="dropdown-item">Registro Empleado Paqueteria</router-link>
+                </li>
                 <li><router-link to="/RegistroAdmin" class="dropdown-item">Registro Adminitrador</router-link></li>
               </ul>
             </li>
             <li class="nav-item">
-              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'" class="nav-link active" aria-current="page" to="/CreditCard">Agregar Tarjeta</router-link>
+              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'" class="nav-link active"
+                aria-current="page" to="/CreditCard">Agregar Tarjeta</router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'ADMIN'" class="nav-link active" aria-current="page" to="/Reportes">Reportes</router-link>
+              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'ADMIN'" class="nav-link active"
+                aria-current="page" to="/Reportes">Reportes</router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'PAQUETERIA'" class="nav-link active" aria-current="page" to="/AceptarArticulo">Aceptar Producto</router-link>
+              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'PAQUETERIA'"
+                class="nav-link active" aria-current="page" to="/AceptarArticulo">Aceptar Producto</router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'PAQUETERIA'" class="nav-link active" aria-current="page" to="/CambiarEstado">Cambiar Estado</router-link>
+              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'PAQUETERIA'"
+                class="nav-link active" aria-current="page" to="/CambiarEstado">Cambiar Estado</router-link>
             </li>
           </ul>
           <div style="margin-right: 10px;">
             <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <router-link to="/Carrito" v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'" class="btn btn-outline-success material-icons"><span
-                  class="">shopping_cart</span></router-link>
+              <router-link to="/Carrito" v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'"
+                class="btn btn-outline-success material-icons"><span class="">shopping_cart</span></router-link>
             </ul>
           </div>
           <div>
@@ -168,5 +170,4 @@ export default {
   margin-right: 1%;
   margin-top: 20px;
   margin-bottom: 1%;
-}
-</style>
+}</style>

@@ -10,7 +10,7 @@ import ReportesComponent from  '../components/ReportesComponent.vue'
 import VerArticuloComponent from '../components/VerArticuloComponent.vue';
 import ListaVentasComponent from '../components/ListaVentasComponent.vue';
 import ListaArticulosEntradaComponent from '../components/ListaArticulosEntradaComponent.vue';
-import cambiarEstadoComponent from '../components/cambiarEstadoComponent.vue';
+import CambiarEstadoComponent from '../components/CambiarEstadoComponent.vue';
 import VerificarArticuloComponene from '../components/VerificarArticuloComponene.vue';
 import AgregarTarjetaComponent from '../components/AgregarTarjetaComponent.vue'
 
@@ -74,8 +74,8 @@ const routes = [
     {
         path:'/ModificarEstado/:id',
         name:'ModificarEstado',
-        component:cambiarEstadoComponent,
-        props:true
+        props:true,
+        component:CambiarEstadoComponent
     },
     {
         path:'/VerificarArticulo/:id',
