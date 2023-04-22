@@ -8,6 +8,7 @@ const usuarioSchema = new Schema({
     password:String,
     role:String,
     token:String,
+    card:Array
 },
 {
     versionKey:false

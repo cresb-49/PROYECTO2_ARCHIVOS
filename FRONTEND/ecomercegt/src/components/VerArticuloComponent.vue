@@ -1,7 +1,8 @@
 <template>
     <div>
         <div align="center">
-            <img :src="articulo.imagen" alt="Imagen del Articulo" style="max-width: 100%;">
+            <img :src="'http://localhost:3000/ecommercegt/img?id=' + articulo._id" alt="Imagen del Articulo"
+                style="max-width: 100%;">
         </div>
         <h4 style="margin-top: 20px;">{{ articulo.nombre }}</h4>
         <p>{{ articulo.descripcion }}</p>
@@ -13,8 +14,6 @@
         <div class="row justify-content-between" style="margin-top: 20px;">
             <button v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'" @click="agregarCarrito"
                 class="btn btn-outline-success col" style="margin: 5px;">Agregar al Carrito</button>
-            <button v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'" @click="procesarCompra"
-                class="btn btn-outline-warning col" style="margin: 5px;">Procesar Compra</button>
         </div>
     </div>
 </template>
@@ -72,25 +71,6 @@ export default {
                     console.log(response.response.data.error);
                     toast.error(response.response.data.error)
                 })
-        },
-        procesarCompra() {
-            let id = this.articulo._id;
-            let payload = {
-                usuario: this.$store.state.user,
-                articulo: id,
-                valor: this.articulo.precio,
-                isCentro: true,
-                isCamino: false,
-                isHome: false
-            }
-            this.axios.post('/api/venta', payload)
-            // eslint-disable-next-line no-unused-vars
-            .then(response=>{
-                toast.success('Compra realizada con exito!!!')
-            })  
-            .catch(response=>{
-                toast.error('Error en compra!!!\n'+response.response.data.error)
-            })
         }
     }
 }

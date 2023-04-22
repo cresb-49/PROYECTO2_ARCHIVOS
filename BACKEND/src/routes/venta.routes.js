@@ -13,5 +13,4 @@ router.get('/ventas/all',autorizacion.auth,ventaController.getAllVentas);
 
 router.get('/venta',autorizacion.auth,ventaController.obtenerVenta);
 
-
 module.exports = router;

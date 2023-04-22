@@ -38,6 +38,9 @@
               </ul>
             </li>
             <li class="nav-item">
+              <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'" class="nav-link active" aria-current="page" to="/CreditCard">Agregar Tarjeta</router-link>
+            </li>
+            <li class="nav-item">
               <router-link v-if="$store.state.isAuthenticated && $store.state.role === 'ADMIN'" class="nav-link active" aria-current="page" to="/Reportes">Reportes</router-link>
             </li>
             <li class="nav-item">

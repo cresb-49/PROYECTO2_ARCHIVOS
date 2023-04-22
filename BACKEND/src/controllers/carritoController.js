@@ -27,12 +27,20 @@ const obtenerCarrito = async (req, res) => {
 }
 
 const eliminarCarrito = async (req, res) => {
-    console.log('Eliminar carrito');
-    res.send('Eliminar carrito');
+    const usuario = req.body.usuario;
+    const fillter = { usuario: usuario }
+    try {
+        const result = await carrito.updateOne(fillter, { $set: { productos: [] } });
+        res.status(200);
+        res.send(result)
+    } catch (error) {
+        res.status(409);
+        res.send({ error: error.message });
+    }
 }
 
 const eliminarArticuloCarrito = async (req, res) => {
-    const data = req.query;
+    const data = req.body;
     try {
         const usuario = data.usuario;
         const producto = data.id;
@@ -40,7 +48,7 @@ const eliminarArticuloCarrito = async (req, res) => {
             { usuario },
             { $pull: { productos: producto } },
             { new: true }
-          );
+        );
         res.status(200);
         res.send(carritoActualizado);
     } catch (error) {

@@ -2,10 +2,18 @@ const venta = require('../models/venta');
 const articulo = require('../models/articulo');
 
 const insertarVenta = async (req, res) => {
+    const ids = req.body.articulos;
+    const articulos = await articulo.find({ _id: { $in: ids } }).select('-imagen');
+    let valor = 0;
+    for (const a of articulos) {
+        valor = valor + a.precio;
+    }
+    valor = valor.toFixed(2);
     const insert = new venta({
         usuario: req.body.usuario,
-        articulo: req.body.articulo,
-        valor: req.body.valor,
+        card: req.body.usuario,
+        articulos: req.body.articulos,
+        valor: valor,
         isCentro: req.body.isCentro,
         isCamino: req.body.isCamino,
         isHome: req.body.isHome
@@ -93,6 +101,6 @@ module.exports = {
     insertarVenta: insertarVenta,
     obtenerVentas: obtenerVentas,
     modificarEstados: modificarEstados,
-    obtenerVenta:obtenerVenta,
-    getAllVentas:getAllVentas
+    obtenerVenta: obtenerVenta,
+    getAllVentas: getAllVentas
 }

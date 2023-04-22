@@ -6,12 +6,12 @@ const insertarUsuario = async (req, res) => {
         if (!(req.body.password === req.body.password2)) {
             res.status(400);
             res.send('Las contrasenias no son iguales');
-        }else{
+        } else {
             const password = await handleBcrypt.encrypt(req.body.password);
             const insert = new usuario(
                 {
                     user: req.body.user,
-                    email:req.body.email,
+                    email: req.body.email,
                     password: password,
                     role: req.body.role
                 }
@@ -32,8 +32,72 @@ const actualizarUsuario = async (req, res) => {
 }
 
 const obtenerUsuario = async (req, res) => {
-    console.log('Obtener info usuario');
-    res.send('Obtener info usuario');
+    const usuario = req.body.usuario;
+    console.log(usuario);
+    res.send({ usuario: usuario })
+}
+const obtenerCards = async (req, res) => {
+    const user = req.body.usuario;
+    const filter = { user: user };
+
+    try {
+        const result = await usuario.findOne(filter).select('-password -token')
+        res.status(200);
+        res.send(result)
+    } catch (error) {
+        res.status(409);
+        res.send({ error: error.message });
+    }
+}
+
+const newCard = async (req, res) => {
+    const card = req.body.card;
+    const filter = { user: req.body.usuario }
+    try {
+        const result = await usuario.findOne(filter).select('-password -token');
+        let cards = result.card;
+        const objetoExistente = cards.find(objeto => objeto.numero === card.numero);
+        if (objetoExistente) {
+            res.status(409);
+            res.send({ error: "Ya existe un tarjeta con el mismo número." });
+        } else {
+            cards.push(card);
+            try {
+                const newValue = { card: cards }
+                await usuario.updateOne(filter, newValue);
+                res.status(200);
+                res.send(cards);
+            } catch (error) {
+                res.status(409);
+                res.send({ error: error.message });
+            }
+        }
+    } catch (error) {
+        res.status(409);
+        res.send({ error: error.message });
+    }
+}
+
+const eliminarCard = async (req, res) => {
+    const card = req.body.card;
+    const filter = { user: req.body.user }
+    try {
+        const result = await usuario.findOne(filter).select('-password -token');
+        let cards = result.card;
+        let nuevaLista = cards.filter(objeto => objeto.numero !== card);
+        try {
+            const newValue = { card: nuevaLista }
+            await usuario.updateOne(filter, newValue);
+            res.status(200);
+            res.send(nuevaLista);
+        } catch (error) {
+            res.status(409);
+            res.send({ error: error.message });
+        }
+    } catch (error) {
+        res.status(409);
+        res.send({ error: error.message });
+    }
 }
 
 const eliminarUsuario = async (req, res) => {
@@ -51,5 +115,8 @@ module.exports = {
     actualizarUsuario: actualizarUsuario,
     obtenerUsuario: obtenerUsuario,
     eliminarUsuario: eliminarUsuario,
-    obtenerUsuarios: obtenerUsuarios
+    obtenerUsuarios: obtenerUsuarios,
+    obtenerCards: obtenerCards,
+    newCard: newCard,
+    eliminarCard: eliminarCard
 }
