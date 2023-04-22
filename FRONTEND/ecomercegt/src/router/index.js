@@ -13,6 +13,7 @@ import ListaArticulosEntradaComponent from '../components/ListaArticulosEntradaC
 import CambiarEstadoComponent from '../components/CambiarEstadoComponent.vue';
 import VerificarArticuloComponene from '../components/VerificarArticuloComponene.vue';
 import AgregarTarjetaComponent from '../components/AgregarTarjetaComponent.vue'
+import ListaArticulosUsuario from '../components/ListaArticulosUsuario.vue';
 
 const routes = [
     {
@@ -82,10 +83,16 @@ const routes = [
         name:'VerificarArticulo',
         component:VerificarArticuloComponene,
         props:true
-    },{
+    },
+    {
         path:'/CreditCard',
         name: 'CreditCard',
         component:AgregarTarjetaComponent
+    },
+    {
+        path:'/MisArticulos',
+        name:'MisArticulos',
+        component:ListaArticulosUsuario
     }
 ];
 

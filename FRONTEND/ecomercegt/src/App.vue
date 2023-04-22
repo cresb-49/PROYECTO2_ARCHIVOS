@@ -21,7 +21,7 @@
                 Articulos
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item">Articulos</a></li>
+                <li><router-link to="/MisArticulos" class="dropdown-item">Articulos</router-link></li>
                 <li><router-link to="/NuevoArticulo" class="dropdown-item">Vender Articulo</router-link></li>
               </ul>
             </li>

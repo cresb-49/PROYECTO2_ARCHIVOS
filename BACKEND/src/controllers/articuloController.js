@@ -53,7 +53,7 @@ const aceptarArticulo = async (req, res) => {
 const obtenerArticulos = async (req, res) => {
     const nombre = (req.body.nombre === undefined ? req.query.nombre : req.body.nombre);
     if (nombre) {
-        const articulos = await articulo.find({ "nombre": new RegExp(nombre, 'i') },'-imagen');
+        const articulos = await articulo.find({ "nombre": new RegExp(nombre, 'i') }, '-imagen');
         res.status(200).json(articulos);
 
     } else {
@@ -62,6 +62,16 @@ const obtenerArticulos = async (req, res) => {
     }
 }
 
+const obtenerArticulosUsuario = async (req, res) => {
+    const usuario = (req.body.usuario === undefined ? req.query.usuario : req.body.usuario);
+    try {
+        const articulos = await articulo.find({ usuario: usuario }).select('-imagen');
+        res.status(200).send(articulos);
+    } catch (error) {
+        res.status(409);
+        res.send({ error: error.message });
+    }
+}
 
 const initData = async (req, res) => {
     try {
@@ -604,5 +614,6 @@ module.exports = {
     eliminarArticulo: eliminarArticulo,
     aceptarArticulo: aceptarArticulo,
     initData: initData,
-    obtenerImagen: obtenerImagen
+    obtenerImagen: obtenerImagen,
+    obtenerArticulosUsuario: obtenerArticulosUsuario
 }

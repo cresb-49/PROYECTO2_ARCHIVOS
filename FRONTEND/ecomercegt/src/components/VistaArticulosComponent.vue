@@ -12,7 +12,8 @@
             <template v-for="articulo in articulos" :key="articulo._1d">
                 <template v-if="!articulo.vendido && articulo.aceptado">
                     <CardArticulo
-                        :articulo="{ codigo: articulo._id, usuario: articulo.usuario, nombre: articulo.nombre, precio: articulo.precio, imagen: articulo.imagen, descripcion: articulo.descripcion, categoria: articulo.categoria }">
+                        :articulo="{ codigo: articulo._id, usuario: articulo.usuario, nombre: articulo.nombre, precio: articulo.precio, imagen: articulo.imagen, descripcion: articulo.descripcion, categoria: articulo.categoria }"
+                        :comprar="true">
                     </CardArticulo>
                 </template>
             </template>
