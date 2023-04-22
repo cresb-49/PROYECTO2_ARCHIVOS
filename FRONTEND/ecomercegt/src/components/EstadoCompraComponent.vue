@@ -6,10 +6,16 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <img :src="'http://localhost:3000/ecommercegt/img?id='+d.articulo._id" alt="Imagen de ejemplo" class="img-fluid">
+                            <CarruselVue :articulos="d.articulos" ></CarruselVue>
                         </div>
                         <div class="col-md-8">
-                            <h5 class="card-title">{{ d.articulo.nombre }}</h5>
+                            <h5 class="card-title">Articulos</h5>
+                            <template v-for="a in d.articulos" v-bind:key="a">
+                                <ul>
+                                    <li>{{ a.nombre }}</li>
+                                </ul>
+                            </template>
+                            <h5 class="card-title">Estado</h5>
                             <div v-if="d.venta.isCentro">
                                 <p class="card-text">En el centro de Paqueteria</p>
                                 <div class="progress">
@@ -28,7 +34,7 @@
                                 <p class="card-text">Entregado en su casa</p>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
                                 </div>
                                 <p class="card-text">Disfruta tu articulo :D</p>
                             </div>
@@ -42,12 +48,15 @@
 
 <script>
 import { toast } from 'vue3-toastify';
-
+import CarruselVue from './CarruselVue.vue'
 export default {
     name: 'EstadoCompra',
+    components:{
+        CarruselVue
+    },
     data() {
         return {
-            data: []
+            data: [],
         }
     },
     mounted() {

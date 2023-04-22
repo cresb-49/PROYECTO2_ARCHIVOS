@@ -33,9 +33,13 @@ const obtenerVentas = async (req, res) => {
         let data = []
         const result = await venta.find(filter);
         for (const v of result) {
-            const filter = { _id: v.articulo };
-            const r = await articulo.findOne(filter).select('-imagen');
-            data.push({ articulo: r, venta: v });
+            let articulos = [];
+            for (const id of v.articulos) {
+                const filter2 = { _id: id };
+                const r = await articulo.findOne(filter2).select('-imagen');
+                articulos.push(r);
+            }
+            data.push({ articulos: articulos, venta: v });
         };
         res.status(200);
         res.send(data);
