@@ -5,10 +5,10 @@
             <h2>Articulos sin vender</h2>
             <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
                 <template v-for="articulo in articulos" :key="articulo">
-                    <template v-if="articulo.vendido" >
+                    <template v-if="!articulo.vendido" >
                         <CardArticulo
                             :articulo="{ codigo: articulo._id, usuario: articulo.usuario, nombre: articulo.nombre, precio: articulo.precio, imagen: articulo.imagen, descripcion: articulo.descripcion, categoria: articulo.categoria }"
-                            :comprar="false">
+                            :comprar="true">
                         </CardArticulo>
                     </template>
                 </template>
@@ -16,7 +16,7 @@
             <h2>Articulos vendidos</h2>
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <template v-for="articulo in articulos" :key="articulo">
-                    <template v-if="!articulo.vendido" >
+                    <template v-if="articulo.vendido" >
                         <CardArticulo
                             :articulo="{ codigo: articulo._id, usuario: articulo.usuario, nombre: articulo.nombre, precio: articulo.precio, imagen: articulo.imagen, descripcion: articulo.descripcion, categoria: articulo.categoria }"
                             :comprar="false">

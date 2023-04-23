@@ -21,9 +21,20 @@ const insertarArticulo = async (req, res) => {
 
 const obtenerArticulo = async (req, res) => {
     let find = req.query;
-    //console.log(find)
     try {
         const result = await articulo.findById(find).select('-imagen');
+        res.status(200);
+        res.send(result);
+    } catch (error) {
+        res.status(409);
+        res.send({ 'error': error.message });
+    }
+}
+
+const obtenerArticuloCompleto = async (req, res) => {
+    let find = req.query;
+    try {
+        const result = await articulo.findById(find);
         res.status(200);
         res.send(result);
     } catch (error) {
@@ -40,6 +51,19 @@ const eliminarArticulo = async (req, res) => {
 const aceptarArticulo = async (req, res) => {
     const filter = { _id: (req.body.id === undefined ? req.query.id : req.body.id) }
     const update = { aceptado: (req.body.aceptado === undefined ? req.query.aceptado : req.body.aceptado) }
+    try {
+        const result = await articulo.findOneAndUpdate(filter, update);
+        res.status(200);
+        res.send(result);
+    } catch (error) {
+        res.status(409);
+        res.send({ error: error.message });
+    }
+}
+
+const modifificarArticulo = async (req, res) => {
+    const filter = { _id: req.body.id }
+    const update = req.body.articulo;
     try {
         const result = await articulo.findOneAndUpdate(filter, update);
         res.status(200);
@@ -615,5 +639,7 @@ module.exports = {
     aceptarArticulo: aceptarArticulo,
     initData: initData,
     obtenerImagen: obtenerImagen,
-    obtenerArticulosUsuario: obtenerArticulosUsuario
+    obtenerArticulosUsuario: obtenerArticulosUsuario,
+    modifificarArticulo: modifificarArticulo,
+    obtenerArticuloCompleto: obtenerArticuloCompleto
 }

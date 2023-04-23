@@ -12,8 +12,14 @@
         </ul>
         <h5 style="margin-top: 20px;"> Valor: Q. {{ articulo.precio }}</h5>
         <div class="row justify-content-between" style="margin-top: 20px;">
-            <button v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO'" @click="agregarCarrito"
-                class="btn btn-outline-success col" style="margin: 5px;">Agregar al Carrito</button>
+            <button
+                v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO' && articulo.usuario !== $store.state.user"
+                @click="agregarCarrito" class="btn btn-outline-success col" style="margin: 5px;">Agregar al Carrito</button>
+
+            <button
+                v-if="$store.state.isAuthenticated && $store.state.role === 'USUARIO' && articulo.usuario === $store.state.user"
+                @click="modificarProducto" class="btn btn-outline-warning col" style="margin: 5px;">Modificar Producto
+            </button>
         </div>
     </div>
 </template>
@@ -71,6 +77,9 @@ export default {
                     console.log(response.response.data.error);
                     toast.error(response.response.data.error)
                 })
+        },
+        modificarProducto() {
+            this.$router.push({ name: 'ModificarArticulo', params: { id: this.articulo._id } });
         }
     }
 }

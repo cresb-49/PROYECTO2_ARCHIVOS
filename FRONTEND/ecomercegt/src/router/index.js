@@ -14,6 +14,7 @@ import CambiarEstadoComponent from '../components/CambiarEstadoComponent.vue';
 import VerificarArticuloComponene from '../components/VerificarArticuloComponene.vue';
 import AgregarTarjetaComponent from '../components/AgregarTarjetaComponent.vue'
 import ListaArticulosUsuario from '../components/ListaArticulosUsuario.vue';
+import ModificarArticulo from '../components/ModificarArticulo.vue'
 
 const routes = [
     {
@@ -93,6 +94,12 @@ const routes = [
         path:'/MisArticulos',
         name:'MisArticulos',
         component:ListaArticulosUsuario
+    },
+    {
+        path:'/ModificarArticulo/:id',
+        name:'ModificarArticulo',
+        props:true,
+        component: ModificarArticulo
     }
 ];
 

@@ -7,6 +7,7 @@ const ventaSchema = new Schema({
     card: String,
     articulos: Array,
     valor: Number,
+    fecha: Date,
     isCentro: Boolean,
     isCamino: Boolean,
     isHome: Boolean

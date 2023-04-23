@@ -14,13 +14,14 @@ const insertarVenta = async (req, res) => {
         card: req.body.usuario,
         articulos: req.body.articulos,
         valor: valor,
+        fecha: new Date(),
         isCentro: req.body.isCentro,
         isCamino: req.body.isCamino,
         isHome: req.body.isHome
     });
     try {
         const insertarVenta = await insert.save();
-        res.status(200);
+        res.status(200);    
         res.send(insertarVenta);
     } catch (error) {
         res.status(409);

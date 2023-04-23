@@ -7,7 +7,7 @@
         <p class="card-text overflow-ellipsis"><small>{{ articulo.descripcion }}</small></p>
         <p class="card-text">Valor: Q.{{ articulo.precio }}</p>
         <RouterLink :to="{ name: 'Articulo', params: { id: $props.articulo.codigo } }" class="btn btn-outline-primary btn-sm" v-show="comprar" >
-          Comprar</RouterLink>
+          Ver</RouterLink>
       </div>
     </div>
   </div>

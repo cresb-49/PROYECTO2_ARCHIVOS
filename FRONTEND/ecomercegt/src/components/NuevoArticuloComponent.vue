@@ -1,82 +1,82 @@
 <template>
     <div>
-        <div class="card">
-            <div class="container" style="padding: 20px;">
-                <h2 class="mb-3">Nuevo Articulo</h2>
-                <form @submit.prevent="generarArticulo">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre del articulo</label>
-                        <input type="text" id="nombre" class="form-control" aria-labelledby="nombreHelpBlock"
-                            v-model="nombre" required>
-                        <div id="nombreHelpBlock" class="form-text">
-                            Agrega un nombre no tan complicado para mejor la busqueda en la pagina, se descriptivo como
-                            manta de
-                            seda azul o la marca del producto asi como Samsumg Galxy s20
-                        </div>
+    </div>
+    <div class="card">
+        <div class="container" style="padding: 20px;">
+            <h2 class="mb-3">Nuevo Articulo</h2>
+            <form @submit.prevent="generarArticulo">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre del articulo</label>
+                    <input type="text" id="nombre" class="form-control" aria-labelledby="nombreHelpBlock" v-model="nombre"
+                        required>
+                    <div id="nombreHelpBlock" class="form-text">
+                        Agrega un nombre no tan complicado para mejor la busqueda en la pagina, se descriptivo como
+                        manta de
+                        seda azul o la marca del producto asi como Samsumg Galxy s20
                     </div>
+                </div>
 
-                    <div class="input-group mb-3">
-                        <label for="precio" class="col-form-label" style="margin-right: 15px;">Precio</label>
-                        <div class="input-group-text" style="border-radius: 5px 0px 0px 5px;">$</div>
-                        <input type="number" step="0.01" class="form-control"
-                            style="max-width: 200px;border-radius: 0px 5px 5px 0px;" v-model="precio" required>
-                        <span class="input-group form-text">Agrega el valor del articulo</span>
+                <div class="input-group mb-3">
+                    <label for="precio" class="col-form-label" style="margin-right: 15px;">Precio</label>
+                    <div class="input-group-text" style="border-radius: 5px 0px 0px 5px;">$</div>
+                    <input type="number" step="0.01" class="form-control"
+                        style="max-width: 200px;border-radius: 0px 5px 5px 0px;" v-model="precio" required>
+                    <span class="input-group form-text">Agrega el valor del articulo</span>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripcion</label>
+                    <textarea type="text" id="descripcion" class="form-control" aria-labelledby="descripcionHelpBlock"
+                        rows="5" v-model="descripcion" required></textarea>
+                    <div id="descripcionHelpBlock" class="form-text">
+                        Agrega una pequena descripcion de el estado fisico del articulo o una recomenadacion sobre el
+                        mismo
                     </div>
-                    <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripcion</label>
-                        <textarea type="text" id="descripcion" class="form-control" aria-labelledby="descripcionHelpBlock"
-                            rows="5" v-model="descripcion" required></textarea>
-                        <div id="descripcionHelpBlock" class="form-text">
-                            Agrega una pequena descripcion de el estado fisico del articulo o una recomenadacion sobre el
-                            mismo
+                </div>
+                <div class="mb-3">
+                    <label for="categorias" class="form-label">Categorias</label>
+                    <div id="categorias" class="form-control">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"
+                                v-model="tec">
+                            <label class="form-check-label" for="inlineCheckbox1">Tecnología</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2"
+                                v-model="hogar">
+                            <label class="form-check-label" for="inlineCheckbox2">Hogar</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"
+                                v-model="academico">
+                            <label class="form-check-label" for="inlineCheckbox3">Académico</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"
+                                v-model="literatura">
+                            <label class="form-check-label" for="inlineCheckbox3">Literatura</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"
+                                v-model="decoracion">
+                            <label class="form-check-label" for="inlineCheckbox3">Decoración</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"
+                                v-model="otros">
+                            <label class="form-check-label" for="inlineCheckbox3">Otros</label>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="categorias" class="form-label">Categorias</label>
-                        <div id="categorias" class="form-control">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"
-                                    v-model="tec">
-                                <label class="form-check-label" for="inlineCheckbox1">Tecnología</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2"
-                                    v-model="hogar">
-                                <label class="form-check-label" for="inlineCheckbox2">Hogar</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"
-                                    v-model="academico">
-                                <label class="form-check-label" for="inlineCheckbox3">Académico</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"
-                                    v-model="literatura">
-                                <label class="form-check-label" for="inlineCheckbox3">Literatura</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"
-                                    v-model="decoracion">
-                                <label class="form-check-label" for="inlineCheckbox3">Decoración</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"
-                                    v-model="otros">
-                                <label class="form-check-label" for="inlineCheckbox3">Otros</label>
-                            </div>
-                        </div>
-                        <div id="categoriasHelpBlock" class="form-text">
-                            Agrega una o varias clasificaciones para tu articulo
-                        </div>
+                    <div id="categoriasHelpBlock" class="form-text">
+                        Agrega una o varias clasificaciones para tu articulo
                     </div>
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Imagen del articulo</label>
-                        <input @change="manejoImagen" class="form-control" id="formFile" type="file" required>
-                    </div>
-                    <img :src="imagen" id="imageFile" alt="..."><br><br>
-                    <button type="submit" class="btn btn-outline-primary" required>Registro de Articulo</button>
-                </form>
-            </div>
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Imagen del articulo</label>
+                    <input @change="manejoImagen" class="form-control" id="formFile" type="file" required>
+                </div>
+                <img :src="imagen" id="imageFile" alt="..."><br><br>
+                <button type="submit" class="btn btn-outline-primary" required>Registro de Articulo</button>
+            </form>
         </div>
     </div>
 </template>
@@ -128,28 +128,32 @@ export default {
                 cate.push('Otros')
             }
 
-            // eslint-disable-next-line no-unused-vars
-            let payloand = {
-                usuario: this.usuario,
-                nombre: this.nombre,
-                precio: this.precio,
-                imagen: this.imagen,
-                descripcion: this.descripcion,
-                categoria: cate
+            if (cate.length >= 1) {
+                let payloand = {
+                    usuario: this.usuario,
+                    nombre: this.nombre,
+                    precio: this.precio,
+                    imagen: this.imagen,
+                    descripcion: this.descripcion,
+                    categoria: cate
+                }
+                console.log(payloand);
+                console.log(this.img);
+                this.axios.post('/api/articulo', payloand)
+                    .then(response => {
+                        console.log(response);
+                        toast.success('Registro Exitoso!!! \nNuevo producto en venta');
+                        this.$router.push({ name: 'Articulo', params: { id: response.data._id } });
+                    })
+                    .catch(response => {
+                        console.log(response);
+                        const data = response.response.data;
+                        toast.error(data.mensaje);
+                    })
+
+            } else {
+                toast.error('Debe de seleccionar almenos una categoria para el producto');
             }
-            console.log(payloand);
-            console.log(this.img);
-            this.axios.post('/api/articulo',payloand)
-            .then(response=>{
-                console.log(response);
-                toast.success('Registro Exitoso!!! \nNuevo producto en venta');
-                this.$router.push({name:'Articulo',params:{id:response.data._id}});
-            })
-            .catch(response=>{
-                console.log(response);
-                const data = response.response.data;
-                toast.error(data.mensaje);
-            })
         },
         manejoImagen(e) {
             let vu = this.$data;

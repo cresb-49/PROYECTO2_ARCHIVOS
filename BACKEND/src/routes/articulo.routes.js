@@ -10,7 +10,11 @@ router.post('/articulo', autorizacion.auth, valideCreate, artiuloController.inse
 
 router.put('/articulo', autorizacion.auth, artiuloController.aceptarArticulo);
 
+router.put('/articulo/modificar', autorizacion.auth, artiuloController.modifificarArticulo);
+
 router.get('/articulo', artiuloController.obtenerArticulo);
+
+router.get('/articulo/all', artiuloController.obtenerArticuloCompleto);
 
 router.delete('/articulo', autorizacion.auth, artiuloController.eliminarArticulo);
 

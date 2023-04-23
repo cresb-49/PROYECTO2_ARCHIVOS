@@ -2,6 +2,8 @@
     <div>
         <DialogVue :show='show' tittle="Nueva compra" description="Desea confinuar con la compra" :cancel="cancel"
             :confirm="comparCarrito"></DialogVue>
+        <DialogVue :show='show2' tittle="Eliminar Carrito" description="Desea eliminar todo el carrito" :cancel="cancel"
+            :confirm="vaciarCarrito"></DialogVue>
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">Selecciona tu tarjeta de crédito</h5>
@@ -25,6 +27,8 @@
             </div>
         </div>
         <button class="btn btn-primary mb-3" @click="this.show = true">Comprar todo el carrito</button>
+        <button class="btn btn-danger mb-3" @click="this.show2 = true" style="margin-left: 10px;">Eliminar todo el
+            carrito</button>
         <div v-for="articulo in articulos" v-bind:key="articulo">
             <div class="card mb-3" style="max-width: 300px;">
                 <img :src="'http://localhost:3000/ecommercegt/img?id=' + articulo._id" alt="Placeholder Image"
@@ -57,6 +61,7 @@ export default {
             tarjetas: [],
             valor: 0,
             show: false,
+            show2: false,
             card: null
         }
     },
@@ -167,7 +172,7 @@ export default {
             return this.valor;
         },
         cancel() {
-            toast.warning('La compra no se realizo');
+            this.show2 = false;
             this.show = false;
         },
         asignarValor(e) {
@@ -189,7 +194,8 @@ export default {
                 })
                 .catch(response => {
                     toast.error('Error en compra!!!\n' + response.response.data.error);
-                })
+                });
+            this.show2 = false;
         }
     }
 }
