@@ -22,6 +22,4 @@ router.get('/articulos', artiuloController.obtenerArticulos);
 
 router.get('/articulos/usuario', artiuloController.obtenerArticulosUsuario);
 
-router.get('/articulos/init', artiuloController.initData);
-
 module.exports = router;

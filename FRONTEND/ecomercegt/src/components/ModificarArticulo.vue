@@ -109,7 +109,6 @@ export default {
         this.axios.get(`/api/articulo/all?_id=${this.id}`)
             .then(response => {
                 const data = response.data;
-                console.log(data);
                 vu.nombre = data.nombre;
                 vu.precio = data.precio;
                 vu.descripcion = data.descripcion;
@@ -178,6 +177,8 @@ export default {
 
         },
         manejoImagen(e) {
+            const HEIGHT = 400;
+            const QUALITY = 5; //Este valor es un porcentaje desde 1 a 100
             let vu = this.$data;
             let fileSelect = e.target.files;
             if (fileSelect.length > 0) {
@@ -185,8 +186,19 @@ export default {
                 let fileReader = new FileReader();
                 fileReader.onload = (FileLoadEvent) => {
                     let result = FileLoadEvent.target.result;
-                    vu.imagen = result;
-                    vu.img = true;
+                    console.log(result);  
+                    let img = document.createElement("img");
+                    img.src = result
+                    img.onload = (e) => {
+                        let canvas = document.createElement("canvas");
+                        let ratio = HEIGHT / e.target.height
+                        canvas.height = HEIGHT;
+                        canvas.width = e.target.width * ratio;
+                        const context = canvas.getContext("2d");
+                        context.drawImage(img,0,0,canvas.width,canvas.height);
+                        let new_img_url = context.canvas.toDataURL('image/jpeg',QUALITY);  
+                        vu.imagen = new_img_url;
+                    }
                 }
                 fileReader.readAsDataURL(file);
             }

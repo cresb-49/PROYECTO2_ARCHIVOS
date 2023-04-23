@@ -1,7 +1,7 @@
 <template>
   <div class="col">
     <div class="card h-100">
-      <img :src="'http://localhost:3000/ecommercegt/img?id=' + articulo.codigo" alt="imagen producto">
+      <img :src="'http://localhost:3000/ecommercegt/img?id=' + articulo.codigo" class="imgP img-fluid" alt="imagen producto">
       <div class="card-body">
         <h5 class="card-title">{{ articulo.nombre }}</h5>
         <p class="card-text overflow-ellipsis"><small>{{ articulo.descripcion }}</small></p>
@@ -39,12 +39,10 @@ export default {
 </script>
   
 <style scoped>
-img {
-  margin-top: 10px;
-  max-width: 320px;
-  max-height: 300px;
-  align-self: center;
+.imgP {
+  margin: 20px;
   border-radius: 5px;
+  max-height: 400px;
 }
 
 p {
