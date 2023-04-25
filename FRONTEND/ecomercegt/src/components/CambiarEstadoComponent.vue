@@ -80,41 +80,50 @@ export default {
         }
     },
     mounted() {
-        let vue = this;
-        let idventa = this.$route.params.id;
-        this.axios(`/api/venta?id=${idventa}`)
-            .then(response => {
-                vue.data = response.data;
-                vue.articulos = response.data.articulos;
-                vue.venta = response.data.venta;
-                vue.Ce = vue.venta.isCentro;
-                vue.Ca = vue.venta.isCamino;
-                vue.Ho = vue.venta.isHome;
-            })
-            .catch(response => {
-                console.log(response);
-                toast.error(response.response.data.error);
-            })
+        let ver_obj = JSON.parse(localStorage.getItem('vuex'));
+        let ver_auth = ver_obj.isAuthenticated;
+        let ver_rol = ver_obj.role;
+        if (ver_auth && ver_rol === 'PAQUETERIA') {
+            let vue = this;
+            let idventa = this.$route.params.id;
+            this.axios(`/api/venta?id=${idventa}`)
+                .then(response => {
+                    vue.data = response.data;
+                    vue.articulos = response.data.articulos;
+                    vue.venta = response.data.venta;
+                    vue.Ce = vue.venta.isCentro;
+                    vue.Ca = vue.venta.isCamino;
+                    vue.Ho = vue.venta.isHome;
+                })
+                .catch(response => {
+                    console.log(response);
+                    toast.error(response.response.data.error);
+                })
+        } else {
+            this.$router.push('/');
+        }
+
+
     },
     methods: {
         modificarEstado() {
             let payload = {
-                id:this.venta._id,
-                estados:{
+                id: this.venta._id,
+                estados: {
                     isCentro: this.Ce,
                     isCamino: this.Ca,
                     isHome: this.Ho
                 }
             }
-            this.axios.put('/api/venta',payload)
-            .then(response=>{
-                toast.success('Estado modificado correctamente');
-                console.log(response.data);
-            })
-            .catch(response=>{
-                toast.error('Error de modificacion!!!'+response.response.data);
-                console.log(response.response.data);
-            })
+            this.axios.put('/api/venta', payload)
+                .then(response => {
+                    toast.success('Estado modificado correctamente');
+                    console.log(response.data);
+                })
+                .catch(response => {
+                    toast.error('Error de modificacion!!!' + response.response.data);
+                    console.log(response.response.data);
+                })
         },
         cambiarValor(e) {
             let value = e.target.value;

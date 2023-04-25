@@ -74,7 +74,7 @@
                         <input @change="manejoImagen" class="form-control" id="formFile" type="file">
                     </div>
                     <img :src="imagen" id="imageFile" alt="..."><br><br>
-                    <button type="submit" class="btn btn-outline-primary" >Modificar Articulo</button>
+                    <button type="submit" class="btn btn-outline-primary">Modificar Articulo</button>
                 </form>
             </div>
         </div>
@@ -103,26 +103,33 @@ export default {
             otros: false
         }
     }, mounted() {
-        let vu = this;
-        this.usuario = JSON.parse(localStorage.getItem('vuex')).user;
-        this.id = this.$route.params.id;
-        this.axios.get(`/api/articulo/all?_id=${this.id}`)
-            .then(response => {
-                const data = response.data;
-                vu.nombre = data.nombre;
-                vu.precio = data.precio;
-                vu.descripcion = data.descripcion;
-                vu.imagen = data.imagen;
-                vu.tec = (data.categoria.find(element => element === 'Tecnología') === undefined ? false : true);
-                vu.hogar = (data.categoria.find(element => element === 'Hogar') === undefined ? false : true);
-                vu.academico = (data.categoria.find(element => element === 'Académico') === undefined ? false : true);
-                vu.literatura = (data.categoria.find(element => element === 'Literatura') === undefined ? false : true);
-                vu.decoracion = (data.categoria.find(element => element === 'Decoración') === undefined ? false : true);
-                vu.otros = (data.categoria.find(element => element === 'Otros') === undefined ? false : true);
-            })
-            .catch(response => {
-                console.log(response.response.error);
-            });
+        if (JSON.parse(localStorage.getItem('vuex')).isAuthenticated) {
+            let vu = this;
+            this.usuario = JSON.parse(localStorage.getItem('vuex')).user;
+            this.id = this.$route.params.id;
+            this.axios.get(`/api/articulo/all?_id=${this.id}`)
+                .then(response => {
+                    const data = response.data;
+                    vu.nombre = data.nombre;
+                    vu.precio = data.precio;
+                    vu.descripcion = data.descripcion;
+                    vu.imagen = data.imagen;
+                    vu.tec = (data.categoria.find(element => element === 'Tecnología') === undefined ? false : true);
+                    vu.hogar = (data.categoria.find(element => element === 'Hogar') === undefined ? false : true);
+                    vu.academico = (data.categoria.find(element => element === 'Académico') === undefined ? false : true);
+                    vu.literatura = (data.categoria.find(element => element === 'Literatura') === undefined ? false : true);
+                    vu.decoracion = (data.categoria.find(element => element === 'Decoración') === undefined ? false : true);
+                    vu.otros = (data.categoria.find(element => element === 'Otros') === undefined ? false : true);
+                    if(data.usuario !== vu.usuario){
+                        this.$router.push('/');
+                    }
+                })
+                .catch(response => {
+                    console.log(response.response.error);
+                });
+        } else {
+            this.$router.push('/');
+        }
     }
     ,
     methods: {
@@ -186,7 +193,7 @@ export default {
                 let fileReader = new FileReader();
                 fileReader.onload = (FileLoadEvent) => {
                     let result = FileLoadEvent.target.result;
-                    console.log(result);  
+                    console.log(result);
                     let img = document.createElement("img");
                     img.src = result
                     img.onload = (e) => {
@@ -195,8 +202,8 @@ export default {
                         canvas.height = HEIGHT;
                         canvas.width = e.target.width * ratio;
                         const context = canvas.getContext("2d");
-                        context.drawImage(img,0,0,canvas.width,canvas.height);
-                        let new_img_url = context.canvas.toDataURL('image/jpeg',QUALITY);  
+                        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        let new_img_url = context.canvas.toDataURL('image/jpeg', QUALITY);
                         vu.imagen = new_img_url;
                     }
                 }

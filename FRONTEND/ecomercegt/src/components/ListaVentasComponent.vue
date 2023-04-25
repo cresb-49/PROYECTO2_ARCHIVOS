@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-3">
-                            <CarruselVue :articulos="d.articulos" ></CarruselVue>
+                            <CarruselVue :articulos="d.articulos"></CarruselVue>
                         </div>
                         <div class="col-9">
                             <h5 class="card-title">Articulos</h5>
@@ -14,7 +14,8 @@
                                     <li>{{ a.nombre }}</li>
                                 </ul>
                             </template>
-                            <button @click="verificarArticulo(d.venta)" class="btn btn-primary float-right">Modificar Estado</button>
+                            <button @click="verificarArticulo(d.venta)" class="btn btn-primary float-right">Modificar
+                                Estado</button>
                         </div>
                     </div>
                 </div>
@@ -28,33 +29,39 @@ import { toast } from 'vue3-toastify';
 import CarruselVue from './CarruselVue.vue'
 export default {
     name: 'ListaVentas',
-    components:{
+    components: {
         CarruselVue
     },
     data() {
-        return{
-            data:[]
+        return {
+            data: []
         }
     },
     props: {
 
     },
-    mounted(){
-        let vu = this;
-        this.axios.get('/api/ventas/all')
-            .then(response => {
-                vu.data = response.data;
-                toast.success('Articulos recuperados!!!')
-            })
-            .catch(response => {
-                let error = response.response.data.error
-                toast.error(error);
-            })
-
+    mounted() {
+        let ver_obj = JSON.parse(localStorage.getItem('vuex'));
+        let ver_auth = ver_obj.isAuthenticated;
+        let ver_rol = ver_obj.role;//ADMIN USUARIO PAQUETERIA
+        if (ver_auth && ver_rol === 'PAQUETERIA') {
+            let vu = this;
+            this.axios.get('/api/ventas/all')
+                .then(response => {
+                    vu.data = response.data;
+                    toast.success('Articulos recuperados!!!')
+                })
+                .catch(response => {
+                    let error = response.response.data.error
+                    toast.error(error);
+                });
+        } else {
+            this.$router.push('/');
+        }
     },
-    methods:{
-        verificarArticulo(venta){
-            this.$router.push({ name: 'ModificarEstado', params: { id:venta._id } });
+    methods: {
+        verificarArticulo(venta) {
+            this.$router.push({ name: 'ModificarEstado', params: { id: venta._id } });
         }
     }
 }

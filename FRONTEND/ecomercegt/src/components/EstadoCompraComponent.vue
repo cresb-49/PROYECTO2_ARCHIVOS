@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <CarruselVue :articulos="d.articulos" ></CarruselVue>
+                            <CarruselVue :articulos="d.articulos"></CarruselVue>
                         </div>
                         <div class="col-md-8">
                             <h5 class="card-title">Articulos</h5>
@@ -51,7 +51,7 @@ import { toast } from 'vue3-toastify';
 import CarruselVue from './CarruselVue.vue'
 export default {
     name: 'EstadoCompra',
-    components:{
+    components: {
         CarruselVue
     },
     data() {
@@ -60,18 +60,25 @@ export default {
         }
     },
     mounted() {
-        let vu = this;
-        const payload = {
-            usuario: vu.$store.state.user
+        let ver_obj = JSON.parse(localStorage.getItem('vuex'));
+        let ver_auth = ver_obj.isAuthenticated;
+        let ver_rol = ver_obj.role;
+        if (ver_auth && ver_rol === 'USUARIO') {
+            let vu = this;
+            const payload = {
+                usuario: vu.$store.state.user
+            }
+            this.axios.get(`/api/ventas?usuario=${vu.$store.state.user}`, payload)
+                .then(response => {
+                    vu.data = response.data;
+                    toast.success('Compras recuperadas');
+                })
+                .catch(response => {
+                    toast.error(response.response.data.error);
+                });
+        } else {
+            this.$router.push('/');
         }
-        this.axios.get(`/api/ventas?usuario=${vu.$store.state.user}`, payload)
-            .then(response => {
-                vu.data = response.data;
-                toast.success('Compras recuperadas');
-            })
-            .catch(response => {
-                toast.error(response.response.data.error);
-            })
     }
 }
 </script>

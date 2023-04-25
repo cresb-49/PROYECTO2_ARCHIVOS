@@ -15,11 +15,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-for=" card in  tarjetas " v-bind:key="card">
+                    <template v-for=" card in    tarjetas   " v-bind:key="card">
                         <tr>
                             <td>{{ card.propietario }}</td>
                             <td>{{ card.numero }}</td>
-                            <td><button @click="this.show = true; this.cardDelete = card.numero" class="btn btn-danger btn-sm" type="button">Eliminar</button></td>
+                            <td><button @click="this.show = true; this.cardDelete = card.numero"
+                                    class="btn btn-danger btn-sm" type="button">Eliminar</button></td>
                         </tr>
                     </template>
                 </tbody>
@@ -106,20 +107,26 @@ export default {
         }
     },
     mounted() {
-        const vu = this;
-        vu.nombreUsuario = vu.$store.state.user;
-        //Obtener la tarjetas de los usuarios ingresados
-        const payload = {
-            usuario: vu.nombreUsuario
+        let ver_obj = JSON.parse(localStorage.getItem('vuex'));
+        let ver_auth = ver_obj.isAuthenticated;
+        let ver_rol = ver_obj.role;
+        if (ver_auth && ver_rol === 'USUARIO') {
+            const vu = this;
+            vu.nombreUsuario = vu.$store.state.user;
+            //Obtener la tarjetas de los usuarios ingresados
+            const payload = {
+                usuario: vu.nombreUsuario
+            }
+            this.axios.post('/api/usuario/cards', payload)
+                .then(response => {
+                    vu.tarjetas = response.data.card;
+                })
+                .catch(response => {
+                    toast.error(response.response.data.error)
+                });
+        } else {
+            this.$router.push('/');
         }
-        this.axios.post('/api/usuario/cards', payload)
-            .then(response => {
-                vu.tarjetas = response.data.card;
-            })
-            .catch(response => {
-                toast.error(response.response.data.error)
-            })
-
     },
     methods: {
         asignarMes(e) {
@@ -178,7 +185,7 @@ export default {
                         toast.error(response.response.data.error);
                     })
             }
-            this.show=false;
+            this.show = false;
         },
         cancel() {
             this.show = false;

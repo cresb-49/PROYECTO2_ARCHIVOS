@@ -1,7 +1,8 @@
 <template>
     <div>
         <div align="center">
-            <img :src="'http://localhost:3000/ecommercegt/img?id='+articulo._id" alt="Imagen del Articulo" style="max-width: 100%;">
+            <img :src="'http://localhost:3000/ecommercegt/img?id=' + articulo._id" alt="Imagen del Articulo"
+                style="max-width: 100%;">
         </div>
         <h4 style="margin-top: 20px;">{{ articulo.nombre }}</h4>
         <p>{{ articulo.descripcion }}</p>
@@ -37,19 +38,26 @@ export default {
         }
     },
     mounted() {
-        let vu = this;
-        const id = this.$route.params.id;
-        this.axios.get(`/api/articulo?_id=${id}`)
-            .then(response => {
-                let data = response.data;
-                vu.articulo = data;
-            })
-            // eslint-disable-next-line no-unused-vars
-            .catch(error => {
-                toast.error('No existe el producto introducido');
-                //Redireccion al inicio de la pagina
-                this.$router.push('/');
-            });
+        let ver_obj = JSON.parse(localStorage.getItem('vuex'));
+        let ver_auth = ver_obj.isAuthenticated;
+        let ver_rol = ver_obj.role;//ADMIN USUARIO PAQUETERIA
+        if (ver_auth && ver_rol === 'PAQUETERIA') {
+            let vu = this;
+            const id = this.$route.params.id;
+            this.axios.get(`/api/articulo?_id=${id}`)
+                .then(response => {
+                    let data = response.data;
+                    vu.articulo = data;
+                })
+                // eslint-disable-next-line no-unused-vars
+                .catch(error => {
+                    toast.error('No existe el producto introducido');
+                    //Redireccion al inicio de la pagina
+                    this.$router.push('/');
+                });
+        } else {
+            this.$router.push('/');
+        }
     },
     methods: {
         aceptarArticulo() {

@@ -103,7 +103,14 @@ export default {
         }
     },
     mounted() {
-        this.usuario = JSON.parse(localStorage.getItem('vuex')).user;
+        let ver_obj = JSON.parse(localStorage.getItem('vuex'));
+        let ver_auth = ver_obj.isAuthenticated;
+        let ver_rol = ver_obj.role;//ADMIN USUARIO PAQUETERIA
+        if (ver_auth && ver_rol === 'USUARIO') {
+            this.usuario = JSON.parse(localStorage.getItem('vuex')).user;
+        } else {
+            this.$router.push('/');
+        }
     },
     methods: {
         generarArticulo() {
@@ -165,7 +172,7 @@ export default {
                 let fileReader = new FileReader();
                 fileReader.onload = (FileLoadEvent) => {
                     let result = FileLoadEvent.target.result;
-                    console.log(result);  
+                    console.log(result);
                     let img = document.createElement("img");
                     img.src = result
                     img.onload = (e) => {
@@ -174,8 +181,8 @@ export default {
                         canvas.height = HEIGHT;
                         canvas.width = e.target.width * ratio;
                         const context = canvas.getContext("2d");
-                        context.drawImage(img,0,0,canvas.width,canvas.height);
-                        let new_img_url = context.canvas.toDataURL('image/jpeg',QUALITY);  
+                        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        let new_img_url = context.canvas.toDataURL('image/jpeg', QUALITY);
                         vu.imagen = new_img_url;
                     }
                 }

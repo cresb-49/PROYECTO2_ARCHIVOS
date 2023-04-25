@@ -66,34 +66,41 @@ export default {
         }
     },
     mounted() {
-        let vu = this;
-        let usuario = this.$store.state.user;
-        this.axios.get(`/api/carrito?usuario=${usuario}`)
-            .then(response => {
-                vu.productos = response.data.productos;
-                vu.productos.forEach(element => {
-                    vu.axios.get(`/api/articulo?_id=${element}`)
-                        .then(response => {
-                            vu.articulos.push(response.data);
-                        }).catch(response => {
-                            toast.error(response.response.data.error);
-                        })
+        let ver_obj = JSON.parse(localStorage.getItem('vuex'));
+        let ver_auth = ver_obj.isAuthenticated;
+        let ver_rol = ver_obj.role;
+        if (ver_auth && ver_rol === 'USUARIO') {
+            let vu = this;
+            let usuario = this.$store.state.user;
+            this.axios.get(`/api/carrito?usuario=${usuario}`)
+                .then(response => {
+                    vu.productos = response.data.productos;
+                    vu.productos.forEach(element => {
+                        vu.axios.get(`/api/articulo?_id=${element}`)
+                            .then(response => {
+                                vu.articulos.push(response.data);
+                            }).catch(response => {
+                                toast.error(response.response.data.error);
+                            })
+                    });
+                })
+                .catch(response => {
+                    toast.error(response.response.data.error);
+                })
+            //Obtener la tarjetas de los usuarios ingresados
+            const payload = {
+                usuario: this.$store.state.user
+            }
+            this.axios.post('/api/usuario/cards', payload)
+                .then(response => {
+                    vu.tarjetas = response.data.card;
+                })
+                .catch(response => {
+                    toast.error(response.response.data.error)
                 });
-            })
-            .catch(response => {
-                toast.error(response.response.data.error);
-            })
-        //Obtener la tarjetas de los usuarios ingresados
-        const payload = {
-            usuario: this.$store.state.user
+        } else {
+            this.$router.push('/');
         }
-        this.axios.post('/api/usuario/cards', payload)
-            .then(response => {
-                vu.tarjetas = response.data.card;
-            })
-            .catch(response => {
-                toast.error(response.response.data.error)
-            })
     },
     methods: {
         eliminar(articulo) {
