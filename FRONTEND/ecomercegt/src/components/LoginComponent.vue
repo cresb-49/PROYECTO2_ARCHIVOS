@@ -46,7 +46,6 @@ export default {
                     //Reinico de las variables del formulario
                     this.user = null; this.password = null; 
                     const data = response.data;
-                    console.log(data);
                     toast.success('Session iniciada');
                     this.axios.defaults.headers.common['Authorization']='Bearer '+data.token;
                     localStorage.setItem('token',data.token);
@@ -60,9 +59,6 @@ export default {
                 .catch(response => {
                     //Mensaje de error por el response
                     const data = response.response.data;
-                    const status = response.request.status;
-                    console.log(data);
-                    console.log(status);
                     toast.error(data.mensaje);
                 })
         }

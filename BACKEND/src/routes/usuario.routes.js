@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/usuario',existsUser.verificarUsuario,usuarioControler.insertarUsuario);
 
-router.put('/usuario',usuarioControler.actualizarUsuario);
+router.put('/usuario',autorizacion.auth,usuarioControler.actualizarUsuario);
 
 router.post('/usuario/cards',autorizacion.auth,usuarioControler.obtenerCards);
 
@@ -19,5 +19,9 @@ router.post('/usuario/newcard',autorizacion.auth,usuarioControler.newCard);
 router.delete('/usuario',usuarioControler.eliminarUsuario);
 
 router.get('/usuarios',usuarioControler.obtenerUsuarios);
+
+router.get('/usuario/empleados',autorizacion.auth,usuarioControler.obtenerEmpleados);
+
+router.get('/usuario',autorizacion.auth,usuarioControler.obtenerUsuario);
 
 module.exports = router;

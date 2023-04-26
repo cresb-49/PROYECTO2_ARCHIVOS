@@ -26,16 +26,6 @@ const insertarUsuario = async (req, res) => {
     }
 }
 
-const actualizarUsuario = async (req, res) => {
-    console.log('Modificacion de usuario');
-    res.send('Modificacion de usuario');
-}
-
-const obtenerUsuario = async (req, res) => {
-    const usuario = req.body.usuario;
-    console.log(usuario);
-    res.send({ usuario: usuario })
-}
 const obtenerCards = async (req, res) => {
     const user = req.body.usuario;
     const filter = { user: user };
@@ -110,6 +100,81 @@ const obtenerUsuarios = async (req, res) => {
     res.send(usuarios);
 }
 
+const obtenerEmpleados = async (req, res) => {
+    let filter = { role: { $ne: "USUARIO" } }
+    const usuarios = await usuario.find(filter).select('-password -token');
+    res.send(usuarios);
+}
+
+const obtenerUsuario = async (req, res) => {
+    const id = req.query.id;
+    const user = await usuario.findOne({ _id: id }).select('-password -token -card -role');
+    res.status(200).json(user)
+}
+
+const actualizarUsuario = async (req, res) => {
+    const data = req.body;
+    try {
+        const user = await usuario.findOne({ _id: data.id });
+        const usertmp = await usuario.findOne({ user: data.user });
+        if (usertmp) {
+            if (usertmp._id.equals(user._id)) {
+                if (data.newPass.length > 0) {
+                    const newPass = await handleBcrypt.encrypt(data.newPass);
+                    const oldPass = data.oldPass;
+                    const result = await handleBcrypt.compare(oldPass, user.password);
+                    if (result) {
+                        const up = {
+                            email: req.body.email,
+                            user: req.body.user,
+                            password: newPass
+                        }
+                        const r = await usuario.findOneAndUpdate({ _id: data.id }, up);
+                        res.status(200).json({ info: 'Informacion actualizada' });
+                    } else {
+                        res.status(409).json({ error: 'La contrasena antigua no es correcta' });
+                    }
+                } else {
+                    const up = {
+                        email: data.email,
+                        user: data.user,
+                    }
+                    const r = await usuario.findOneAndUpdate({ _id: data.id }, up);
+                    res.status(200).json({ info: 'Informacion actualizada' });
+                }
+            } else {
+                res.status(409).json({ error: `El nombre de usuario "${data.user}" ya esta en uso` });
+            }
+        } else {
+            if (data.newPass.length > 0) {
+                const newPass = await handleBcrypt.encrypt(data.newPass);
+                const oldPass = data.oldPass;
+                const result = await handleBcrypt.compare(oldPass, user.password);
+                if (result) {
+                    const up = {
+                        email: req.body.email,
+                        user: req.body.user,
+                        password: newPass
+                    }
+                    const r = await usuario.findOneAndUpdate({ _id: data.id }, up);
+                    res.status(200).json({ info: 'Informacion actualizada' });
+                } else {
+                    res.status(409).json({ error: 'La contrasena antigua no es correcta' });
+                }
+            } else {
+                const up = {
+                    email: data.email,
+                    user: data.user,
+                }
+                const r = await usuario.findOneAndUpdate({ _id: data.id }, up);
+                res.status(200).json({ info: 'Informacion actualizada' });
+            }
+        }
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
 module.exports = {
     insertarUsuario: insertarUsuario,
     actualizarUsuario: actualizarUsuario,
@@ -118,5 +183,6 @@ module.exports = {
     obtenerUsuarios: obtenerUsuarios,
     obtenerCards: obtenerCards,
     newCard: newCard,
-    eliminarCard: eliminarCard
+    eliminarCard: eliminarCard,
+    obtenerEmpleados, obtenerEmpleados
 }

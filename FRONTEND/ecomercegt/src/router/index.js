@@ -6,7 +6,7 @@ import EstadoCompraComponent from '../components/EstadoCompraComponent.vue'
 import CarritoComponent from '../components/CarritoComponent.vue'
 import RegistroAdministradorComponent from '../components/RegistroAdministradorComponent.vue'
 import RegistroEmpleadoComponent from '../components/RegistroEmpleadoComponent.vue'
-import ReportesComponent from  '../components/ReportesComponent.vue'
+import ReportesComponent from '../components/ReportesComponent.vue'
 import VerArticuloComponent from '../components/VerArticuloComponent.vue';
 import ListaVentasComponent from '../components/ListaVentasComponent.vue';
 import ListaArticulosEntradaComponent from '../components/ListaArticulosEntradaComponent.vue';
@@ -14,7 +14,9 @@ import CambiarEstadoComponent from '../components/CambiarEstadoComponent.vue';
 import VerificarArticuloComponene from '../components/VerificarArticuloComponene.vue';
 import AgregarTarjetaComponent from '../components/AgregarTarjetaComponent.vue'
 import ListaArticulosUsuario from '../components/ListaArticulosUsuario.vue';
-import ModificarArticulo from '../components/ModificarArticulo.vue'
+import ModificarArticulo from '../components/ModificarArticulo.vue';
+import ModificarUsuarioComponent from '../components/ModificarUsuarioComponent.vue';
+import ListaUsuariosSistema from '../components/ListaUsuariosSistema.vue';
 
 const routes = [
     {
@@ -58,48 +60,59 @@ const routes = [
         component: ReportesComponent
     },
     {
-        path:'/Articulo/:id',
-        name:'Articulo',
-        component:VerArticuloComponent,
-        props:true
+        path: '/Articulo/:id',
+        name: 'Articulo',
+        component: VerArticuloComponent,
+        props: true
     },
     {
-        path:'/AceptarArticulo',
-        name:'AceptarArticulo',
-        component:ListaArticulosEntradaComponent
+        path: '/AceptarArticulo',
+        name: 'AceptarArticulo',
+        component: ListaArticulosEntradaComponent
     },
     {
-        path:'/CambiarEstado',
-        name:'CambiarEstado',
-        component:ListaVentasComponent
+        path: '/CambiarEstado',
+        name: 'CambiarEstado',
+        component: ListaVentasComponent
     },
     {
-        path:'/ModificarEstado/:id',
-        name:'ModificarEstado',
-        props:true,
-        component:CambiarEstadoComponent
+        path: '/ModificarEstado/:id',
+        name: 'ModificarEstado',
+        props: true,
+        component: CambiarEstadoComponent
     },
     {
-        path:'/VerificarArticulo/:id',
-        name:'VerificarArticulo',
-        component:VerificarArticuloComponene,
-        props:true
+        path: '/VerificarArticulo/:id',
+        name: 'VerificarArticulo',
+        component: VerificarArticuloComponene,
+        props: true
     },
     {
-        path:'/CreditCard',
+        path: '/CreditCard',
         name: 'CreditCard',
-        component:AgregarTarjetaComponent
+        component: AgregarTarjetaComponent
     },
     {
-        path:'/MisArticulos',
-        name:'MisArticulos',
-        component:ListaArticulosUsuario
+        path: '/MisArticulos',
+        name: 'MisArticulos',
+        component: ListaArticulosUsuario
     },
     {
-        path:'/ModificarArticulo/:id',
-        name:'ModificarArticulo',
-        props:true,
+        path: '/ModificarArticulo/:id',
+        name: 'ModificarArticulo',
+        props: true,
         component: ModificarArticulo
+    },
+    {
+        path: '/ModificarUsuario/:id',
+        name: 'ModificarUsuario',
+        props: true,
+        component: ModificarUsuarioComponent
+    },
+    {
+        path: '/Empleados',
+        name: 'ListaEmpleados',
+        component: ListaUsuariosSistema
     }
 ];
 

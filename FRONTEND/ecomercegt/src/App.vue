@@ -33,6 +33,7 @@
                 <li><router-link to="/RegistroEmpleado" class="dropdown-item">Registro Empleado Paqueteria</router-link>
                 </li>
                 <li><router-link to="/RegistroAdmin" class="dropdown-item">Registro Adminitrador</router-link></li>
+                <li><router-link to="/Empleados" class="dropdown-item">Modificacion Empleados</router-link></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -87,61 +88,27 @@
           <div class="d-flex flex-wrap justify-content-between">
             <div>
               <a href="/" class="d-flex align-items-center p-0 text-dark">
-                <img alt="logo" src="" width="30px" />
-                <span class="ms-3 h5 font-weight-bold">Devwares</span>
+                <img alt="logo" src="./assets/logo.png" width="30px" />
+                <span class="ms-3 h5 font-weight-bold">E-Comerce GT</span>
               </a>
               <p class="my-3" style="width: 250px">
-                We are creating High Quality Resources and tools to Aid developers during the
-                developement of their projects
+                Somos la pagina mas segura de compra y venta del pais, pioneros en el estandar de envio y manejo de paquetes, si tienes algo que vender
+                E-Comerce GT es la mejor opcion
               </p>
             </div>
             <div>
-              <p class="h5 mb-4" style="font-weight: 600">Devwares</p>
-              <ul class="p-0" style="list-style: none; cursor: pointer">
-                <li class="my-2">
-                  <a class="text-dark" href="/">Resources</a>
-                </li>
-                <li class="my-2">
-                  <a class="text-dark" href="/">About Us</a>
-                </li>
-                <li class="my-2">
-                  <a class="text-dark" href="/">Contact</a>
-                </li>
-                <li class="my-2">
-                  <a class="text-dark" href="/">Blog</a>
-                </li>
-              </ul>
-            </div>
-            <div>
               <p class="h5 mb-4" style="font-weight: 600">Help</p>
               <ul class="p-0" style="list-style: none; cursor: pointer">
                 <li class="my-2">
-                  <a class="text-dark" href="/">Support</a>
-                </li>
-                <li class="my-2">
-                  <a class="text-dark" href="/">Sign Up</a>
-                </li>
-                <li class="my-2">
-                  <a class="text-dark" href="/">Sign In</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p class="h5 mb-4" style="font-weight: 600">Help</p>
-              <ul class="p-0" style="list-style: none; cursor: pointer">
-                <li class="my-2">
-                  <a class="text-dark" href="/">Support</a>
-                </li>
-                <li class="my-2">
-                  <a class="text-dark" href="/">Sign Up</a>
-                </li>
-                <li class="my-2">
-                  <a class="text-dark" href="/">Sign In</a>
+                  <router-link v-if="!$store.state.isAuthenticated" class="text-dark"
+                    to="/Login">Login</router-link>
+                  <a v-if="$store.state.isAuthenticated" @click="$store.commit('logout')"
+                    class="text-dark">Logout</a>
                 </li>
               </ul>
             </div>
           </div>
-          <small class="text-center mt-5">&copy; Devwares, 2020. All rights reserved.</small>
+          <small class="text-center mt-5">&copy; E-Comerce GT, 2023. All rights reserved.</small>
         </div>
       </footer>
     </div>
@@ -170,4 +137,5 @@ export default {
   margin-right: 1%;
   margin-top: 20px;
   margin-bottom: 1%;
-}</style>
+}
+</style>
