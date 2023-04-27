@@ -1,5 +1,6 @@
 const venta = require('../models/venta');
 const articulo = require('../models/articulo');
+const moment = require('moment');
 
 const insertarVenta = async (req, res) => {
     const ids = req.body.articulos;
@@ -14,7 +15,7 @@ const insertarVenta = async (req, res) => {
         card: req.body.usuario,
         articulos: req.body.articulos,
         valor: valor,
-        fecha: new Date(),
+        fecha: moment().format('YYYY-MM-DD'),
         isCentro: req.body.isCentro,
         isCamino: req.body.isCamino,
         isHome: req.body.isHome
